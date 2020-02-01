@@ -45,7 +45,6 @@ public class CrowBrain : MonoBehaviour
                 grabJoint.autoConfigureDistance = false;
                 grabJoint.distance = holdDistance;
                 grabJoint.frequency = 5f;
-                //grabJoint.maxDistanceOnly = true;
                 
                 gotPart = true;
             } else if (xDir > 0f != transform.position.x < target.position.x || (!gotPart && target.tag != "attached"))
