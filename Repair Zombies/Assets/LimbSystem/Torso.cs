@@ -13,38 +13,16 @@ public class Torso : MonoBehaviour, IDamageable
     [SerializeField]
     private int crawlThreshold, hopThreshold;
 
-    [SerializeField]
     public float MovementVal { get; private set;}
     public float DamageVal { get; private set; }
 
-    [HideInInspector]
-    public int movementState = 2;
+    private int movementState = 2;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void DealDamage(float damage)
-    {
-        List<SocketHandler> sockets = new List<SocketHandler>();
-
-        if (!armFront.IsAttachable) sockets.Add(armFront);
-        if (!armBack.IsAttachable) sockets.Add(armBack);
-        if (!legFront.IsAttachable) sockets.Add(legFront);
-        if (!legBack.IsAttachable) sockets.Add(legBack);
-        if (!head.IsAttachable) sockets.Add(head);
-
-        sockets[(int)UnityEngine.Random.value * sockets.Count].TakeDamage(damage);
-    
+        GetComponent<InitialZombieParts>().AttachAll();
     }
 
     public void GetLimbVals() 
@@ -92,11 +70,17 @@ public class Torso : MonoBehaviour, IDamageable
                 }
         }
     }
-}
 
-public enum WalkState
-{
-    Walking,
-    Hopping,
-    Crawling
+    public void DealDamage(float damage)
+    {
+        List<SocketHandler> sockets = new List<SocketHandler>();
+
+        if (!armFront.IsAttachable) sockets.Add(armFront);
+        if (!armBack.IsAttachable) sockets.Add(armBack);
+        if (!legFront.IsAttachable) sockets.Add(legFront);
+        if (!legBack.IsAttachable) sockets.Add(legBack);
+        if (!head.IsAttachable) sockets.Add(head);
+
+        sockets[(int)UnityEngine.Random.value * sockets.Count].TakeDamage(damage);
+    }
 }
