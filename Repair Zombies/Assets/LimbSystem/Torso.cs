@@ -11,12 +11,12 @@ public class Torso : MonoBehaviour, IDamageable
     private SocketHandler head, armFront, armBack, legBack, legFront;
 
     [SerializeField]
-    private int crawlThreshold, hopThreshold;
+    private float crawlThreshold, hopThreshold;
 
     public float MovementVal;
     public float DamageVal;
 
-    public PostureState posture { get; private set; }
+    public PostureState posture;
     private bool isAwake = false;
 
 
