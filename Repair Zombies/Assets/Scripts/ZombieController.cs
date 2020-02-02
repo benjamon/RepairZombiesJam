@@ -18,21 +18,7 @@ public class ZombieController : MonoBehaviour {
     }
 
     void Update() {
-        // posture = something from torso
-        // switch (torso.movementState) {
-        //     case 2: {
-        //         Stand();
-        //         break;
-        //     }
-        //     case 1: {
-        //         Hobble();
-        //         break;
-        //     }
-        //     case 0: {
-        //         Crawl();
-        //         break;
-        //     }
-        // }
+
         UpdatePostureAnim();
 
         if (action == ActionState.Attack) {
@@ -40,7 +26,6 @@ public class ZombieController : MonoBehaviour {
         }
         else if (action == ActionState.Move) {
             // var rb = GetComponent<Rigidbody2D>();
-            posture = torso.posture;
             float delta = Time.deltaTime;
             float speed = torso.MovementVal * direction * delta * moveMult;
             moveMult *= .95f;
@@ -89,7 +74,7 @@ public class ZombieController : MonoBehaviour {
     }
 
     private void UpdatePostureAnim() {
-        switch (posture) {
+        switch (torso.posture) {
             case PostureState.Stand: {
                 animator.SetInteger("WalkStatus", 2);
                 break;
@@ -103,6 +88,7 @@ public class ZombieController : MonoBehaviour {
                 break;
             }
         }
+        posture = torso.posture;
     }
 }
 
