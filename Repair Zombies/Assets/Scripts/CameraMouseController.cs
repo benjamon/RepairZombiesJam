@@ -62,7 +62,7 @@ public class CameraMouseController : MonoBehaviour
                     LastHighlighted.color = Color.white;
                     LastHighlighted = null;
                 }
-                if (socket != null)
+                if (socket != null && Input.GetMouseButtonUp(0))
                 {
                     if (socket.CanAttachLimb(heldLimb))
                         socket.AttachLimb(heldLimb);
