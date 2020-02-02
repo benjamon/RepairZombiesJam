@@ -4815,6 +4815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9e4058f33945b43b7269a14680c577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 1
 --- !u!114 &1794886585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4835,6 +4836,8 @@ MonoBehaviour:
   legFront: {fileID: 0}
   crawlThreshold: 0
   hopThreshold: 0
+  MovementVal: 1
+  DamageVal: 0
 --- !u!1 &1798352960
 GameObject:
   m_ObjectHideFlags: 0

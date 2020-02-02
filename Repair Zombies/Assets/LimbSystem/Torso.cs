@@ -14,8 +14,8 @@ public class Torso : MonoBehaviour
     private int crawlThreshold, hopThreshold;
 
     [SerializeField]
-    public float MovementVal { get; private set;}
-    public float DamageVal { get; private set; }
+    public float MovementVal;
+    public float DamageVal;
 
     private int movementState = 2;
 
