@@ -8,4 +8,9 @@ public class SceneChanger : MonoBehaviour {
         currentSceneRoot.SetActive(false);
         nextSceneRoot.SetActive(true);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        currentSceneRoot.SetActive(false);
+        nextSceneRoot.SetActive(true);
+    }
 }

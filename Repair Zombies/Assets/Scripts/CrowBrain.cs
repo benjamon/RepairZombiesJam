@@ -52,7 +52,7 @@ public class CrowBrain : MonoBehaviour
                 grabJoint.frequency = 5f;
                 grabJoint.breakForce = 240f;
                 gotPart = true;
-                SoundManager.PlaySound(1, transform.position);
+                SoundManager.PlaySound(1, transform.position, .5f);
             } else if (xDir > 0f != transform.position.x < target.position.x || (!gotPart && target.tag != "attached"))
             {
                 target = null;
