@@ -49,7 +49,7 @@ public class Brain : MonoBehaviour
         var rayHit = getNearestRayHit();
         if (rayHit.HasValue) {
             var hitLayerName = LayerMask.LayerToName(rayHit.Value.collider.gameObject.layer);
-
+            Debug.Log("found" + hitLayerName);
             switch (hitLayerName) {
                 case "Obstacle":
                 case "Enemy": {
@@ -80,6 +80,7 @@ public class Brain : MonoBehaviour
         }
         
         if (doDefault) {
+            // Debug.Log("do default");
             newDecision = Decision.move;
             newTarget = null;
             right = true;
@@ -87,6 +88,7 @@ public class Brain : MonoBehaviour
 
         if (decision != newDecision || target != newTarget)
         {
+            Debug.Log(newDecision);
             // start doing something new
             UpdateController(newDecision, right);
             decision = newDecision;
@@ -150,10 +152,11 @@ public class Brain : MonoBehaviour
     private void UpdateController(Decision decision, bool right) {
         switch (decision) {
             case Decision.attack: {
-                zombieController.Attack();
+                zombieController.StartAttack();
                 break;
             }
             case Decision.move: {
+                Debug.Log("moving");
                 zombieController.DirectionRight(right ? 1 : -1);
                 zombieController.Move();
                 break;
@@ -166,8 +169,8 @@ public class Brain : MonoBehaviour
     }
 
     private RaycastHit2D? getNearestRayHit() {
-        var rayHits = Physics2D.RaycastAll(sensor.position, Vector2.right, 5, rayMask);
-        Debug.DrawLine(sensor.position, new Vector3(sensor.position.x + 5, sensor.position.y, sensor.position.z), Color.blue);
+        var rayHits = Physics2D.RaycastAll(sensor.position, Vector2.right, 1.5f, rayMask);
+        Debug.DrawLine(sensor.position, new Vector3(sensor.position.x + 1.5f, sensor.position.y, sensor.position.z), Color.blue);
         foreach (var rayHit in rayHits) {
             if (rayHit.collider.gameObject != this.gameObject) {
                 Debug.DrawLine(sensor.position, new Vector3(sensor.position.x + rayHit.distance, sensor.position.y, sensor.position.z), Color.red);
