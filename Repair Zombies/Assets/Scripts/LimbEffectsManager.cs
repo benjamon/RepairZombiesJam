@@ -17,10 +17,11 @@ public class LimbEffectsManager : MonoBehaviour {
     }
 
     void UpdateLimb(float health) {
-        if (health < healthThresholds[currentLevel]) {
+        while (health < healthThresholds[currentLevel]) {
             currentLevel++;
             particleSystems[currentLevel].Play();
             spriteRenderer.sprite = spriteLevels[currentLevel];
         }
+        
     }
 }

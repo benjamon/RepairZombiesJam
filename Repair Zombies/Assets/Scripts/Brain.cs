@@ -10,10 +10,19 @@ public class Brain : MonoBehaviour
     private bool right = true;
     [SerializeField]
     private Decision decision = Decision.idle;
+    [SerializeField]
+    private float attackDistance = 0.5f;
+    [SerializeField]
+    private float idleDistance = 0.5f;
+    [SerializeField]
+    private float idleReleaseDistance = 1.0f;
     private string target = null;
+    private float confusionTimer;
+    private float maxConfusionTimer = 5.0f;
 
     void Start() {
         // get reference to torso component
+        
     }
 
     void Update() {
@@ -27,42 +36,98 @@ public class Brain : MonoBehaviour
     }
 
     private void NormalUpdate() {
-        var rayHit = getNearestRayHit();
-        // sense
-        // determine state
-        // default to moving to the right
-
-        // if a zombie is ahead of it, idle until the zombie is far enough away
-
-        // if an obstacle or enemy is ahead of it, attack
-
-        // if state has changed, update torso
-    }
-
-    private void ConfusedUpdate() {
-        // when headless, move left or right randomly for 5 seconds each, attack if anything is in front of it
-        Decision newDecision;
-        string newTarget;
+        Decision newDecision = decision;
+        string newTarget = target;
+        var doDefault = true;
 
         var rayHit = getNearestRayHit();
         if (rayHit.HasValue) {
             var hitLayerName = LayerMask.LayerToName(rayHit.Value.collider.gameObject.layer);
             switch (hitLayerName) {
                 case "Obstacle":
-                case "Zombie":
                 case "Enemy": {
-                    if (rayHit.Value.distance < 0.5f) {
+                    if (rayHit.Value.distance < attackDistance) {
                         newDecision = Decision.attack;
                         newTarget = hitLayerName;
+                        doDefault = false;
+                    }
+                    break;
+                }
+                case "Zombie": {
+                    if (rayHit.Value.distance < idleDistance) {
+                        newDecision = Decision.idle;
+                        newTarget = hitLayerName;
+                        doDefault = false;
+                    }
+                    else if (rayHit.Value.distance < idleReleaseDistance) {
+                        newDecision = Decision.move;
+                        newTarget = null;
+                        doDefault = false;
                     }
                     break;
                 }
             }
         }
-        // sense
-        // determine state
-        // if state has changed, update torso
-        // if state has not changed but 5 seconds have passed, randomly change state, update torso
+        
+        if (doDefault) {
+            newDecision = Decision.move;
+            newTarget = null;
+            right = true;
+        }
+
+        if (decision != newDecision || target != newTarget) {
+            // start doing something new
+        }
+    }
+
+    private void ConfusedUpdate() {
+        // when headless, move left or right randomly for 5 seconds each, attack if anything is in front of it
+        confusionTimer -= Time.deltaTime;
+        if (confusionTimer <= 0) {
+            switch (decision) {
+                case Decision.idle:
+                case Decision.move: {
+                    if (Random.value < 0.5f) {
+                        decision = Decision.move;
+                        right = !right;
+                    }
+                    else {
+                        decision = Decision.attack;
+                    }
+                    break;
+                }
+                case Decision.attack: {
+                    decision = Decision.move;
+                    right = !right;
+                    break;
+                }
+            }
+            confusionTimer = maxConfusionTimer;
+            // start doing something new
+        }
+        else if (decision == Decision.move) {
+            var rayHit = getNearestRayHit();
+            if (rayHit.HasValue) {
+                var hitLayerName = LayerMask.LayerToName(rayHit.Value.collider.gameObject.layer);
+                switch (hitLayerName) {
+                    case "Obstacle":
+                    case "Zombie":
+                    case "Enemy": {
+                        if (rayHit.Value.distance < attackDistance) {
+                            if (Random.value < 0.5f) {
+                                decision = Decision.move;
+                                right = !right;
+                            }
+                            else {
+                                decision = Decision.attack;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+            // start doing something new
+        }
     }
 
     private RaycastHit2D? getNearestRayHit() {
@@ -76,6 +141,7 @@ public class Brain : MonoBehaviour
     }
 
     void LoseHead() {
+        confusionTimer = 2.0f;
         confused = true;
         ConfusedUpdate();
     }
