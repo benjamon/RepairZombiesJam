@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-[Ll]ogs/
-[Mm]emoryCaptures/
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -59,3 +59,118 @@ sysinfo.txt
 crashlytics-build.properties
 
 Repair Zombies/Library/
+Repair Zombies/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
+Repair Zombies/Temp/UnityTempFile-06125241c89204836af11ae7c6bf7623
+Repair Zombies/Temp/UnityTempFile-0720bfe56d7724aae8e5c1f483f186ca
+Repair Zombies/Temp/UnityTempFile-087c6eea05729425ab425a04517a66e1
+Repair Zombies/Temp/UnityTempFile-0a7b778bbd00249339fffbd3fe629cc3
+Repair Zombies/Temp/UnityTempFile-0c8a06b95f4624646ba8f777e59934c2
+Repair Zombies/Temp/UnityTempFile-0faf91ab1c0254c1d98fb1b7b5de28f9
+Repair Zombies/Temp/UnityTempFile-12c53b0f122094934bce88808e5d115b
+Repair Zombies/Temp/UnityTempFile-1433188651afe40f2b016dc23439f95f
+Repair Zombies/Temp/UnityTempFile-19f4850ae5c014fb99acbb1bde90da64
+Repair Zombies/Temp/UnityTempFile-1b730a15cc19f4b23a328e5feabb803a
+Repair Zombies/Temp/UnityTempFile-1c9d5145e515947a8b694ba943175173
+Repair Zombies/Temp/UnityTempFile-1d7a62164445d4596b15cb3ffd28923f
+Repair Zombies/Temp/UnityTempFile-1fc28f50c9eca49e28b025cb7af9c30a
+Repair Zombies/Temp/UnityTempFile-245deeee4873e471ca30ae79aae792c0
+Repair Zombies/Temp/UnityTempFile-27a72cb24686546da846f21b629c81f3
+Repair Zombies/Temp/UnityTempFile-28b4c84f398524ad2b6ef9fe03823122
+Repair Zombies/Temp/UnityTempFile-2ce43722a56d040e39360123fdb1f18f
+Repair Zombies/Temp/UnityTempFile-2d88a54d34aca410e85090208d731627
+Repair Zombies/Temp/UnityTempFile-2d978b71c67104cf280348e6721efbe6
+Repair Zombies/Temp/UnityTempFile-2db01dfe43efe4ea2a426821418a6cd6
+Repair Zombies/Temp/UnityTempFile-34860236c01c647bdb7f3224561c4108
+Repair Zombies/Temp/UnityTempFile-37a04d079d7c743caa191b80995a1361
+Repair Zombies/Temp/UnityTempFile-3a9fb64749ddc436ab5a095860823e30
+Repair Zombies/Temp/UnityTempFile-3aa13946fc6454ed7afe09c77c5c3464
+Repair Zombies/Temp/UnityTempFile-3bf439423ccf448e58cd040b1d0b8eac
+Repair Zombies/Temp/UnityTempFile-3cab04125750b4fc7939a81d06bb285f
+Repair Zombies/Temp/UnityTempFile-40c36a8c197fa478ab36a2f9c333103a
+Repair Zombies/Temp/UnityTempFile-420e18d5ab2d24aeab1854fe62c5f8e8
+Repair Zombies/Temp/UnityTempFile-430bb7161c45d47aab5bc3dc174281e6
+Repair Zombies/Temp/UnityTempFile-449dc0e97be7041ddb6d11f51d077b8d
+Repair Zombies/Temp/UnityTempFile-44cf69e1d0f154c9ab5a90840045d468
+Repair Zombies/Temp/UnityTempFile-47b01bb3e29bf4ce681684b6a902f540
+Repair Zombies/Temp/UnityTempFile-4a1d6b3bcca0845d2917088c999caa60
+Repair Zombies/Temp/UnityTempFile-4dbe502bb5fc24234859838511ecdc69
+Repair Zombies/Temp/UnityTempFile-4fdeed74dcbb449af808d32bc91a3c80
+Repair Zombies/Temp/UnityTempFile-529fdf8f358ac4b6a8ba3eb69fb637d8
+Repair Zombies/Temp/UnityTempFile-5865c65c129b1413a94a0a9a7baec6d1
+Repair Zombies/Temp/UnityTempFile-587c9ad0497cb43c29f70a6eaa88a430
+Repair Zombies/Temp/UnityTempFile-5f0d398e83a6a425d898ec91a6808856
+Repair Zombies/Temp/UnityTempFile-630578b514eca486f97d88f3bb54da39
+Repair Zombies/Temp/UnityTempFile-64a26587962824cd9869d66c1f6c0704
+Repair Zombies/Temp/UnityTempFile-666211810775f4deb98ccddcdaf1a51d
+Repair Zombies/Temp/UnityTempFile-66bd04c7255aa4b088278874c3eba4fb
+Repair Zombies/Temp/UnityTempFile-6ae808ad434424a37bee1127e64945f3
+Repair Zombies/Temp/UnityTempFile-6d7a99022520443cf8ac8a4b980a0603
+Repair Zombies/Temp/UnityTempFile-703ca0f43151f4925816d8463c0682af
+Repair Zombies/Temp/UnityTempFile-7188674fc174641e99a1f91a2feb2861
+Repair Zombies/Temp/UnityTempFile-73148e1de195c4d86b66a8876b7e01ee
+Repair Zombies/Temp/UnityTempFile-7316e26983a344042b54970f30433387
+Repair Zombies/Temp/UnityTempFile-75110cb53327d4ec3bfd31a099b62879
+Repair Zombies/Temp/UnityTempFile-779753ebbb3f2458499daf585b60fc75
+Repair Zombies/Temp/UnityTempFile-78e8879d8cda34e1fae767397d5881a7
+Repair Zombies/Temp/UnityTempFile-7c0bad582b40c4af9b22d5849c0256d9
+Repair Zombies/Temp/UnityTempFile-81d5108aac25d48e6975805fb2b31ea4
+Repair Zombies/Temp/UnityTempFile-825d1603ae6194f92af06e5033451141
+Repair Zombies/Temp/UnityTempFile-86b2531b7f22b42d89c59fbf9ab292ee
+Repair Zombies/Temp/UnityTempFile-88463474c1e664678a36368c06f796cf
+Repair Zombies/Temp/UnityTempFile-8a7f5c1716e9a4b10a073ccc00ae79ad
+Repair Zombies/Temp/UnityTempFile-8b9b9fc7b0fca4ce2b53ecf2ba9139e3
+Repair Zombies/Temp/UnityTempFile-8bb32a0b6aa534f258fa1e2cd3a7ef28
+Repair Zombies/Temp/UnityTempFile-8e2859846207c48c3aee9c1b9bd1efcf
+Repair Zombies/Temp/UnityTempFile-8e3c9acdbc14c4782a16c3f641719a50
+Repair Zombies/Temp/UnityTempFile-9208a5846d1784b798b9d5f39ab07266
+Repair Zombies/Temp/UnityTempFile-92689a354d6c54a89ad8f64175282961
+Repair Zombies/Temp/UnityTempFile-93c143f27f40d4ee5963c32e46386c49
+Repair Zombies/Temp/UnityTempFile-94fd1e2d1c4bc41c78eb9e5577415adc
+Repair Zombies/Temp/UnityTempFile-96ef4c44669394c3da00cd78939c3e90
+Repair Zombies/Temp/UnityTempFile-987e3410476ed4ae3873154ec452042b
+Repair Zombies/Temp/UnityTempFile-9918d569bb07c499c9af62c3d1ce7184
+Repair Zombies/Temp/UnityTempFile-9a258bab4c05c4af1a6e9fe42df8ca90
+Repair Zombies/Temp/UnityTempFile-9a96ff297eebb42fa963682b2181d95f
+Repair Zombies/Temp/UnityTempFile-9b14bd956b66c4e6f97a6286182fcaf9
+Repair Zombies/Temp/UnityTempFile-9d3d5d8ddf6454b85bbede8b5d877da8
+Repair Zombies/Temp/UnityTempFile-9e461e431f691470f98ad1cc8eefa48e
+Repair Zombies/Temp/UnityTempFile-9f64d88ad40f14d38a376bb3dd141812
+Repair Zombies/Temp/UnityTempFile-9ffe527749569471096c8d458b1c6da5
+Repair Zombies/Temp/UnityTempFile-a58e15958a19d4e5090815894b9abf4e
+Repair Zombies/Temp/UnityTempFile-a79d8d41338bf4fda8e51543a8f8821a
+Repair Zombies/Temp/UnityTempFile-ac7320d3f521b4057a244507943704f9
+Repair Zombies/Temp/UnityTempFile-b439b10426fa74f2b942dd8284dd0b43
+Repair Zombies/Temp/UnityTempFile-b458754629df24525a6b923e6d7fe2fd
+Repair Zombies/Temp/UnityTempFile-b49752dc135944a098b6e30d5d17d9bd
+Repair Zombies/Temp/UnityTempFile-b4cb6eb9d021744f6a1ea39dfe963119
+Repair Zombies/Temp/UnityTempFile-b6422ce9d204c4772a68ac5d9973a58e
+Repair Zombies/Temp/UnityTempFile-bfc2691d62aeb45909a7d3c8889c3022
+Repair Zombies/Temp/UnityTempFile-c0372db14a05345598a24626fd5f0657
+Repair Zombies/Temp/UnityTempFile-c252994955b6749d497c92956d976b93
+Repair Zombies/Temp/UnityTempFile-c42b31f938f9349fc8000b1a74194491
+Repair Zombies/Temp/UnityTempFile-c557c20c6093a46e6aee07fa656ce1d9
+Repair Zombies/Temp/UnityTempFile-c5a1321500ef84a649e692383001dfc9
+Repair Zombies/Temp/UnityTempFile-c8a4a1cf2fac34288836c3e279878beb
+Repair Zombies/Temp/UnityTempFile-ca0ddd9379f214c8f94f9ecf0f10552c
+Repair Zombies/Temp/UnityTempFile-d268cf0d7416843888d8795190166b9e
+Repair Zombies/Temp/UnityTempFile-d2f53cdcb39164e2cb4916e08df604b3
+Repair Zombies/Temp/UnityTempFile-d59b6a653561b48efbec015583b0ef76
+Repair Zombies/Temp/UnityTempFile-e0292d0793e254e2fbf27ebaeafa0fb7
+Repair Zombies/Temp/UnityTempFile-e684e4f6846954585a9ba0a3d11add10
+Repair Zombies/Temp/UnityTempFile-e8c3660fa4c8a4749b949fedca94bc50
+Repair Zombies/Temp/UnityTempFile-e95815eef00854fdf8cc67863a7ec90e
+Repair Zombies/Temp/UnityTempFile-ea1350090d5c3470cbd724dc2ed0606a
+Repair Zombies/Temp/UnityTempFile-ea6725ec85a86455b9686775b5201404
+Repair Zombies/Temp/UnityTempFile-eb23ea0ca0f6b41dca29ca3d6b76a819
+Repair Zombies/Temp/UnityTempFile-ed34bf77ba5164fee8d2379e78de23f5
+Repair Zombies/Temp/UnityTempFile-ef3262f875f66442e8efdabb3c4ddade
+Repair Zombies/Temp/UnityTempFile-ef634d6a912b541b1a4300351d0c3241
+Repair Zombies/Temp/UnityTempFile-f3df4cddd235f4d3cba3a08681abe77b
+Repair Zombies/Temp/UnityTempFile-f6592d638c3d74286be4ba92e4664f32
+Repair Zombies/Temp/UnityTempFile-f8d7065baea484d728863947c8ddc3fa
+Repair Zombies/Temp/UnityTempFile-f919d46c8149048f3970bc0848ecb5f5
+Repair Zombies/Temp/UnityTempFile-f9fad7364eb8a4ec19146b33cc35cd35
+Repair Zombies/Temp/UnityTempFile-fcf28c5acfed4469eb2fe70d82decf03
+Repair Zombies/Temp/UnityTempFile-fe0a5a155f31c4512b510dad012b091c
+Repair Zombies/Temp/UnityTempFile-ff05028ab2d5f4fd39631f74ca86e0a9
+Repair Zombies/Temp/__Backupscenes/0.backup
