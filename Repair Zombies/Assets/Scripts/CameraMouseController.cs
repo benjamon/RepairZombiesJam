@@ -14,6 +14,7 @@ public class CameraMouseController : MonoBehaviour
     Plane castPlane;
     Vector2 lastdelta;
 
+
     void Start()
     {
         cam = GetComponent<Camera>();

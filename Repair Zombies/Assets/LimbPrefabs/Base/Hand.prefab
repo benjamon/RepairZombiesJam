@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6515005538024051137}
   - component: {fileID: -200891148280486650}
   - component: {fileID: -2477413048289868393}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Hand
   m_TagString: attachable
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.20482612, y: -0.19936419}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.2614507, y: 0.75580484}
@@ -109,7 +109,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 0.50965226, y: 0.4987284}
   m_EdgeRadius: 0
 --- !u!114 &6515005538024051137
 MonoBehaviour:

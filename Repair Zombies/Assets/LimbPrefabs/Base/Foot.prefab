@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6515005538024051137}
   - component: {fileID: -1156466794926689285}
   - component: {fileID: -3995787884838775054}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Foot
   m_TagString: attachable
   m_Icon: {fileID: 0}

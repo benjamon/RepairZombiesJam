@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6515005538024051137}
   - component: {fileID: -4355664644326304203}
   - component: {fileID: -7670174188132861656}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Limb_Generic 1
   m_TagString: attachable
   m_Icon: {fileID: 0}
