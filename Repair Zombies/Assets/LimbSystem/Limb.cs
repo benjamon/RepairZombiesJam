@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class Limb : MonoBehaviour
 {
@@ -44,22 +44,21 @@ public class Limb : MonoBehaviour
     [SerializeField]
     private LimbValsMultiplier extremityMult;
 
+    [SerializeField]
+    public LimbValsMultiplier HeadMult;
+    [SerializeField]
+    public bool IsExtremity;
+    [SerializeField]
+    public bool IsHead;
+    [SerializeField]
+    public float Health;
+    [SerializeField]
+    public Limb AttachedLimb;
+
+    public int NumChildren { get; private set; }
+
     private Rigidbody2D rigidBody2D;
     private Joint2D joint2D;
-
-    public Limb AttachedLimb;
-    public int NumChildren { get; private set; }
-    public LimbValsMultiplier HeadMult;
-    public bool IsExtremity;
-    public bool IsHead;
-    public float Health;
-
-    void Start()
-    {
-        rigidBody2D = GetComponent<Rigidbody2D>();
-        joint2D = GetComponent<Joint2D>();
-    }
-
 
     public LimbVals GetVals()
     {
@@ -100,5 +99,14 @@ public class Limb : MonoBehaviour
         {
             AttachedLimb.joint2D.connectedBody = rigidBody2D;
         }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rigidBody2D = GetComponent<Rigidbody2D>();
+        joint2D = GetComponent<Joint2D>();
+
+        AttachChild(AttachedLimb);
     }
 }
