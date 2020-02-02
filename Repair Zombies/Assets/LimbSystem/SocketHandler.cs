@@ -7,9 +7,26 @@ public class SocketHandler : MonoBehaviour
 {
     public Limb attachedLimb { get; private set;  }
     [SerializeField]
+    private SpriteRenderer highlight;
+    [SerializeField]
+    private Color highlightColor;
+    [SerializeField]
+    private float alphaDecay;
+    [SerializeField]
     private SocketHandler nextSocket, priorSocket;
     [SerializeField]
     private Torso torso;
+
+    [SerializeField]
+    private int currentLimbChildren = 0;
+
+    public int CurrentLimbChildren
+    {
+        get
+        {
+            return currentLimbChildren;
+        }
+    }
 
     private Collider2D cod;
 
@@ -65,7 +82,6 @@ public class SocketHandler : MonoBehaviour
                 nextSocket.ChainAttach(topLimb.AttachedLimb);
             }
         }
-
         torso.GetLimbVals();
     }
 
@@ -128,8 +144,11 @@ public class SocketHandler : MonoBehaviour
 
     public Limb.LimbVals GetVals()
     {
+
+
         if(attachedLimb == null)
         {
+            currentLimbChildren = -1;
             return new Limb.LimbVals
             {
                 movementVal = -0.5f,
@@ -137,6 +156,7 @@ public class SocketHandler : MonoBehaviour
                 legScore = 0
             };
         }
+        currentLimbChildren = attachedLimb.NumChildren;
         if (nextSocket != null && nextSocket.attachedLimb != null)
         {
             return attachedLimb.GetVals().Add(nextSocket.GetVals());
@@ -190,12 +210,17 @@ public class SocketHandler : MonoBehaviour
     {
         if(gameObject.layer == LayerMask.NameToLayer("Attachable"))
         {
-
+            highlight.color = new Color(highlightColor.r, highlightColor.g, highlightColor.b, 1f);
         }
         else if (gameObject.layer == LayerMask.NameToLayer("Detachable"))
         {
             attachedLimb.Highlight();
         }
+    }
+
+    private void Update()
+    {
+        highlight.color = new Color(highlight.color.r, highlight.color.g, highlight.color.b, highlight.color.a - alphaDecay);
     }
 
     const float SOCKET_SIZE = .55f;

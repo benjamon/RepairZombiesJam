@@ -58,11 +58,16 @@ public class Limb : MonoBehaviour
     private float MaxHealth;
     [SerializeField]
     public Limb AttachedLimb;
+    [SerializeField]
+    private Color highlightColor;
+    [SerializeField]
+    private float alphaDecay;
 
     public int NumChildren { get; private set; }
     public Joint2D joint2D { get; private set; }
 
     private Rigidbody2D rigidBody2D;
+    private SpriteRenderer highlight;
 
     //HOOK INTO HIGHLIGHT TO AUTOMATICALLY HIGHLIGHT ALL LIMBS
     //NO OTHER METHODS NECESSARY
@@ -126,7 +131,7 @@ public class Limb : MonoBehaviour
         {
             AttachedLimb.Highlight();
         }
-        GetComponent<SpriteRenderer>().color = Color.red;
+        highlight.GetComponent<SpriteRenderer>().color = highlightColor;
     }
 
     public bool TakeDamage(float damage)
@@ -166,6 +171,11 @@ public class Limb : MonoBehaviour
         Destroy(this);
     }
 
+    private void Update()
+    {
+        highlight.color = new Color(highlight.color.r, highlight.color.g, highlight.color.b, highlight.color.a - alphaDecay);
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -176,5 +186,15 @@ public class Limb : MonoBehaviour
         Health = MaxHealth;
         NumChildren = 0;
         rigidBody2D = GetComponent<Rigidbody2D>();
+
+        GameObject highlightLayer;
+
+        highlightLayer = Instantiate(new GameObject(), transform);
+        highlightLayer.transform.localPosition = Vector3.zero;
+        highlightLayer.transform.localScale = new Vector3(1.1f, 1.1f, 1f);
+        highlightLayer.transform.localRotation = Quaternion.identity;
+        highlight = highlightLayer.AddComponent<SpriteRenderer>();
+        highlight.sprite = GetComponent<SpriteRenderer>().sprite;
+        highlight.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder - 1;
     }
 }
