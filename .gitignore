@@ -2,8 +2,8 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
+[Ll]ibrary/
+[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
@@ -174,3 +174,9 @@ Repair Zombies/Temp/UnityTempFile-fcf28c5acfed4469eb2fe70d82decf03
 Repair Zombies/Temp/UnityTempFile-fe0a5a155f31c4512b510dad012b091c
 Repair Zombies/Temp/UnityTempFile-ff05028ab2d5f4fd39631f74ca86e0a9
 Repair Zombies/Temp/__Backupscenes/0.backup
+Repair Zombies/obj/Debug/Assembly-CSharp.csproj.CoreCompileInputs.cache
+Repair Zombies/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+Repair Zombies/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+Repair Zombies/obj/Debug/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+Repair Zombies/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+Repair Zombies/Temp/UnityLockfile
