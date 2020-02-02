@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Limb : MonoBehaviour
 {
+    [Serializable]
     public struct LimbVals 
     {
         public float movementVal;
@@ -29,6 +31,7 @@ public class Limb : MonoBehaviour
         }
     }
 
+    [Serializable]
     public struct LimbValsMultiplier
     {
         public float movementMult;
@@ -44,12 +47,18 @@ public class Limb : MonoBehaviour
     private Rigidbody2D rigidBody2D;
     private Joint2D joint2D;
 
-    public Limb AttachedLimb { get; set; }
+    public Limb AttachedLimb;
     public int NumChildren { get; private set; }
-    public LimbValsMultiplier HeadMult { get; }
-    public bool IsExtremity { get; }
-    public bool IsHead { get; }
-    public float Health { get; set; }
+    public LimbValsMultiplier HeadMult;
+    public bool IsExtremity;
+    public bool IsHead;
+    public float Health;
+
+    void Start()
+    {
+        rigidBody2D = GetComponent<Rigidbody2D>();
+        joint2D = GetComponent<Joint2D>();
+    }
 
 
     public LimbVals GetVals()
@@ -91,18 +100,5 @@ public class Limb : MonoBehaviour
         {
             AttachedLimb.joint2D.connectedBody = rigidBody2D;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rigidBody2D = GetComponent<Rigidbody2D>();
-        joint2D = GetComponent<Joint2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

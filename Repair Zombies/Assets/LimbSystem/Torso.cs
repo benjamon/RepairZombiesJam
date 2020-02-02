@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Torso : MonoBehaviour
+public class Torso : MonoBehaviour, IDamageable
 {
     public Animator anim;
 
@@ -17,7 +17,8 @@ public class Torso : MonoBehaviour
     public float MovementVal { get; private set;}
     public float DamageVal { get; private set; }
 
-    private int movementState = 2;
+    [HideInInspector]
+    public int movementState = 2;
 
 
     // Start is called before the first frame update
@@ -32,7 +33,7 @@ public class Torso : MonoBehaviour
         
     }
 
-    private void TakeDamage(float damage)
+    public void DealDamage(float damage)
     {
         List<SocketHandler> sockets = new List<SocketHandler>();
 
@@ -91,5 +92,11 @@ public class Torso : MonoBehaviour
                 }
         }
     }
+}
 
+public enum WalkState
+{
+    Walking,
+    Hopping,
+    Crawling
 }
