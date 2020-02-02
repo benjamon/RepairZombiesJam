@@ -5,8 +5,4 @@ using UnityEngine;
 public interface IDamageable
 {
     void DealDamage(float damage);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/nick
