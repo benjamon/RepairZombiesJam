@@ -49,9 +49,7 @@ public class Torso : MonoBehaviour, IDamageable
         {
             Limb.LimbValsMultiplier _headMult = head.GetHeadMult();
             Limb.LimbVals _armVals = armFront.GetVals().Add(armBack.GetVals()).Multiply(_headMult);
-            Debug.Log("armVals" + _armVals);
             Limb.LimbVals _legVals = legFront.GetVals().Add(legBack.GetVals()).Multiply(_headMult);
-            Debug.Log("legVals" + _legVals);
 
             GetMovementState(_legVals.legScore);
 

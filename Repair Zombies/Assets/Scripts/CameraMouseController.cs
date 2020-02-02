@@ -7,12 +7,13 @@ public class CameraMouseController : MonoBehaviour
     public float PullForce;
     SpriteRenderer LastHighlighted;
     float lastTimeHighlighted;
-    GameObject heldObject;
     Vector2 prev;
     Camera cam;
     public Transform plane;
     Plane castPlane;
     Vector2 lastdelta;
+    Limb heldLimb;
+    public LayerMask mask;
 
 
     void Start()
@@ -25,23 +26,26 @@ public class CameraMouseController : MonoBehaviour
     {
         Ray r = cam.ScreenPointToRay(Input.mousePosition);
 
-        Vector3 v = Vector3.zero;
+        Vector3 mouseLocation = Vector3.zero;
 
         if (castPlane.Raycast(r, out float d))
         {
-        v = r.origin + r.direction.normalized * d;
+            mouseLocation = r.origin + r.direction.normalized * d;
         }
-        v.z = 0f;
-        lastdelta = v;
-        prev = v;
-        RaycastHit2D hit = Physics2D.CircleCast(v, .01f, Vector2.zero, 30f, LayerMask.GetMask("ZombiePart"));
+        mouseLocation.z = 0f;
+        lastdelta = mouseLocation;
+        prev = mouseLocation;
+        RaycastHit2D hit = Physics2D.CircleCast(mouseLocation, .01f, Vector2.zero, 30f, mask);
         if (LastHighlighted != null)
             LastHighlighted.color = Color.white;
+
+        //hit some collider
         if (hit.transform != null)
         {
-            Debug.Log(hit.collider.name);
+            Limb limb = hit.collider.GetComponent<Limb>();
+            SocketHandler socket = hit.collider.GetComponent<SocketHandler>();
 
-            if (heldObject == null)
+            if (heldLimb == null)
             {
                 if (hit.collider.GetComponent<SpriteRenderer>() != null)
                 {
@@ -51,40 +55,81 @@ public class CameraMouseController : MonoBehaviour
                     LastHighlighted.color = Color.red;
                     lastTimeHighlighted = Time.time;
                 }
-            } else if (LastHighlighted != null)
+            } else 
             {
-                LastHighlighted.color = Color.white;
-                LastHighlighted = null;
+                if (LastHighlighted != null)
+                {
+                    LastHighlighted.color = Color.white;
+                    LastHighlighted = null;
+                }
+                if (socket != null)
+                {
+                    if (socket.CanAttachLimb(heldLimb))
+                        socket.AttachLimb(heldLimb);
+                    heldLimb = null;
+                }
             }
+
             if (Input.GetMouseButtonDown(0))
             {
-                heldObject = hit.transform.gameObject;
-                heldObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
-                SoundManager.PlaySound(Zound.Hit1, heldObject.transform.position);
+                if (heldLimb == null)
+                {
+                    Debug.Log("A");
+                    if (limb == null && socket != null)
+                    {
+                        Debug.Log("DETACH");
+                        if (socket.gameObject.layer == LayerMask.NameToLayer("Detachable"))
+                            heldLimb = socket.DetachLimb();
+                        Debug.Log(socket.name);
+                    } else if (limb != null)
+                    {
+                        Debug.Log("GRAB LIMB");
+                        heldLimb = limb;
+                    }
+                }
+
+                if (heldLimb != null)
+                {
+                    heldLimb.GetComponent<Rigidbody2D>().gravityScale = 0f;
+                    SoundManager.PlaySound(Zound.Hit1, heldLimb.transform.position);
+                }
+            }
+        } else
+        {
+            if (!Input.GetMouseButton(0) && heldLimb != null)
+            {
+                heldLimb.GetComponent<Rigidbody2D>().gravityScale = 1f;
+                heldLimb = null;
             }
         }
+
+        if (!Input.GetMouseButton(0) && heldLimb != null)
+        {
+            heldLimb.GetComponent<Rigidbody2D>().gravityScale = 1f;
+            heldLimb = null;
+        }
+
+        //PROBABLY REMOVE
         if (LastHighlighted != null && Time.time - lastTimeHighlighted > .25f)
         {
             LastHighlighted.color = Color.white;
             LastHighlighted = null;
         }
-        if (!Input.GetMouseButton(0) && heldObject != null)
+
+        if (heldLimb != null)
         {
-            heldObject.GetComponent<Rigidbody2D>().gravityScale = 1f;
-            heldObject = null;
+            lastdelta = mouseLocation - heldLimb.transform.position;
         }
-        if (heldObject != null)
-            lastdelta = v - heldObject.transform.position;
     }
 
     private void FixedUpdate()
     {
-        if (heldObject != null)
+        if (heldLimb != null)
         {
-            Rigidbody2D rb = heldObject.GetComponent<Rigidbody2D>();
+            Rigidbody2D rb = heldLimb.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                rb.AddForceAtPosition(lastdelta * PullForce, heldObject.transform.position);
+                rb.AddForceAtPosition(lastdelta * PullForce, heldLimb.transform.position);
                 rb.velocity *= .85f;
             }
         }

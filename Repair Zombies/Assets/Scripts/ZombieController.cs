@@ -43,14 +43,14 @@ public class ZombieController : MonoBehaviour {
             posture = torso.posture;
             float delta = Time.deltaTime;
             float speed = torso.MovementVal * direction * delta * moveMult;
-            // moveMult *= .95f;
+            moveMult *= .95f;
             // rb.MovePosition(new Vector2(transform.position.x + speed, transform.position.y));
             // transform.position.Set(transform.position.x + speed, transform.position.y, transform.position.z);
             transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
         }
     }
 
-    float moveMult = 1;
+    float moveMult = 0f;
 
     public void CommandMove() {
         moveMult = 1f;
