@@ -14,9 +14,16 @@ public class Brain : MonoBehaviour
     private float idleDistance = 0.5f;
     [SerializeField]
     private float idleReleaseDistance = 1.0f;
+    [SerializeField]
+    private LayerMask rayMask;
+    [SerializeField]
     private string target = null;
+    [SerializeField]
     private float confusionTimer;
+    [SerializeField]
     private float maxConfusionTimer = 5.0f;
+    [SerializeField]
+    private Transform sensor;
     private ZombieController zombieController;
 
     void Start() {
@@ -42,6 +49,7 @@ public class Brain : MonoBehaviour
         var rayHit = getNearestRayHit();
         if (rayHit.HasValue) {
             var hitLayerName = LayerMask.LayerToName(rayHit.Value.collider.gameObject.layer);
+
             switch (hitLayerName) {
                 case "Obstacle":
                 case "Enemy": {
@@ -58,9 +66,12 @@ public class Brain : MonoBehaviour
                         newTarget = hitLayerName;
                         doDefault = false;
                     }
-                    else if (rayHit.Value.distance < idleReleaseDistance) {
+                    else if (rayHit.Value.distance > idleReleaseDistance) {
                         newDecision = Decision.move;
                         newTarget = null;
+                        doDefault = false;
+                    }
+                    else if (target == "Zombie") {
                         doDefault = false;
                     }
                     break;
@@ -74,10 +85,6 @@ public class Brain : MonoBehaviour
             right = true;
         }
 
-        // start doing something new
-        //UpdateController(newDecision, right);
-        //decision = newDecision;
-        //target = newTarget;
         if (decision != newDecision || target != newTarget)
         {
             // start doing something new
@@ -159,9 +166,11 @@ public class Brain : MonoBehaviour
     }
 
     private RaycastHit2D? getNearestRayHit() {
-        var rayHits = Physics2D.RaycastAll(transform.position, Vector2.right, 5);
+        var rayHits = Physics2D.RaycastAll(sensor.position, Vector2.right, 5, rayMask);
+        Debug.DrawLine(sensor.position, new Vector3(sensor.position.x + 5, sensor.position.y, sensor.position.z), Color.blue);
         foreach (var rayHit in rayHits) {
             if (rayHit.collider.gameObject != this.gameObject) {
+                Debug.DrawLine(sensor.position, new Vector3(sensor.position.x + rayHit.distance, sensor.position.y, sensor.position.z), Color.red);
                 return rayHit;
             }
         }

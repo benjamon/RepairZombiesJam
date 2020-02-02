@@ -18,7 +18,7 @@ public class Torso : MonoBehaviour, IDamageable
 
     private bool isAwake = false;
 
-    private int movementState = 2;
+    public int movementState = 2;
 
 
 
@@ -34,6 +34,12 @@ public class Torso : MonoBehaviour, IDamageable
         GetLimbVals();
     }
 
+    void Update() {
+        if (!isAwake) {
+            LateStart();
+        }
+    }
+
     public void GetLimbVals() 
     {
         if (isAwake)
@@ -44,7 +50,9 @@ public class Torso : MonoBehaviour, IDamageable
 
             Limb.LimbValsMultiplier _headMult = head.GetHeadMult();
             Limb.LimbVals _armVals = armFront.GetVals().Add(armBack.GetVals()).Multiply(_headMult);
+            Debug.Log("armVals" + _armVals);
             Limb.LimbVals _legVals = legFront.GetVals().Add(legBack.GetVals()).Multiply(_headMult);
+            Debug.Log("legVals" + _legVals);
 
             if (_legVals.legScore <= crawlThreshold)
             {

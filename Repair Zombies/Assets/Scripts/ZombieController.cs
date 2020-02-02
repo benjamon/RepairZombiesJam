@@ -3,7 +3,9 @@
 public class ZombieController : MonoBehaviour {
     private Animator animator;
     private Torso torso;
+    [SerializeField]
     private ActionState action;
+    [SerializeField]
     private PostureState posture;
     [SerializeField]
     private int direction = 1;
@@ -17,6 +19,21 @@ public class ZombieController : MonoBehaviour {
 
     void Update() {
         // posture = something from torso
+        // switch (torso.movementState) {
+        //     case 2: {
+        //         Stand();
+        //         break;
+        //     }
+        //     case 1: {
+        //         Hobble();
+        //         break;
+        //     }
+        //     case 0: {
+        //         Crawl();
+        //         break;
+        //     }
+        // }
+        UpdatePostureAnim();
 
         if (action == ActionState.Attack) {
             animator.SetTrigger("Attack");
@@ -25,14 +42,14 @@ public class ZombieController : MonoBehaviour {
             // var rb = GetComponent<Rigidbody2D>();
             float delta = Time.deltaTime;
             float speed = torso.MovementVal * direction * delta * moveMult;
-            moveMult *= .95f;
+            // moveMult *= .95f;
             // rb.MovePosition(new Vector2(transform.position.x + speed, transform.position.y));
             // transform.position.Set(transform.position.x + speed, transform.position.y, transform.position.z);
             transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
         }
     }
 
-    float moveMult;
+    float moveMult = 1;
 
     public void CommandMove() {
         moveMult = 1f;
@@ -44,26 +61,10 @@ public class ZombieController : MonoBehaviour {
     }
 
     public void Move() {
-        switch (posture) {
-            case PostureState.Stand: {
-                animator.SetInteger("WalkStatus", 2);
-                break;
-            }
-            case PostureState.Hobble: {
-                animator.SetInteger("WalkStatus", 1);
-                break;
-            }
-            case PostureState.Crawl: {
-                animator.SetInteger("WalkStatus", 1);
-                break;
-            }
-        }
-
         action = ActionState.Move;
     }
 
     public void Idle() {
-        Move();
         action = ActionState.Idle;
     }
 
@@ -85,6 +86,23 @@ public class ZombieController : MonoBehaviour {
     private void Crawl() {
         posture = PostureState.Crawl;
     }
+
+    private void UpdatePostureAnim() {
+        switch (posture) {
+            case PostureState.Stand: {
+                animator.SetInteger("WalkStatus", 2);
+                break;
+            }
+            case PostureState.Hobble: {
+                animator.SetInteger("WalkStatus", 1);
+                break;
+            }
+            case PostureState.Crawl: {
+                animator.SetInteger("WalkStatus", 0);
+                break;
+            }
+        }
+    }
 }
 
 public enum ActionState {
@@ -94,7 +112,7 @@ public enum ActionState {
 }
 
 public enum PostureState {
-    Stand,
+    Crawl,
     Hobble,
-    Crawl
+    Stand
 }
