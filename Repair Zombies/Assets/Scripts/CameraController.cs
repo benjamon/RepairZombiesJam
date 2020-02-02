@@ -17,5 +17,8 @@ public class CameraController : MonoBehaviour
         if (transform.position.x < leftBound) {
             transform.position = new Vector3(leftBound, transform.position.y, transform.position.z);
         }
+
+        if (Input.GetKeyDown(KeyCode.K))
+            SoundManager.PlaySound(7, transform.position);
     }
 }

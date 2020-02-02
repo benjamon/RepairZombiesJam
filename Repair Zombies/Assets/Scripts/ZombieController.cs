@@ -29,11 +29,12 @@ public class ZombieController : MonoBehaviour {
 
         if (action == ActionState.Attack) {
             animator.SetTrigger("Attack");
+            moveMult = 0f;
         }
         else if (action == ActionState.Move) {
             float delta = Time.deltaTime;
             float speed = torso.MovementVal * direction * delta * moveMult;
-            moveMult *= .95f;
+            moveMult *= .925f;
             transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
         }
     }

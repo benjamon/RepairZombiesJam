@@ -109,7 +109,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 0.75, y: 0.83}
   m_EdgeRadius: 0
 --- !u!114 &6515005538024051137
 MonoBehaviour:
@@ -138,7 +138,7 @@ MonoBehaviour:
   IsDecomposable: 1
   MaxHealth: 1
   AttachedLimb: {fileID: 0}
-  highlightColor: {r: 0.3233736, g: 0.5943396, b: 0.3224012, a: 0}
+  highlightColor: {r: 0, g: 0, b: 0, a: 0}
   alphaDecay: 0.01
 --- !u!50 &-1156466794926689285
 Rigidbody2D:

@@ -16,16 +16,6 @@ public class SocketHandler : MonoBehaviour
     [SerializeField]
     private Torso torso;
 
-    [SerializeField]
-    private int currentLimbChildren = 0;
-
-    public int CurrentLimbChildren
-    {
-        get
-        {
-            return currentLimbChildren;
-        }
-    }
 
     private Collider2D cod;
 
@@ -143,10 +133,8 @@ public class SocketHandler : MonoBehaviour
     public Limb.LimbVals GetVals()
     {
 
-
         if(attachedLimb == null)
         {
-            currentLimbChildren = -1;
             return new Limb.LimbVals
             {
                 movementVal = -0.5f,
@@ -154,12 +142,17 @@ public class SocketHandler : MonoBehaviour
                 legScore = 0
             };
         }
-        currentLimbChildren = attachedLimb.NumChildren;
         if (nextSocket != null && nextSocket.attachedLimb != null)
         {
             return attachedLimb.GetVals().Add(nextSocket.GetVals());
         }
         else return attachedLimb.GetVals();
+    }
+
+    public bool IsFullLimb()
+    {
+        if (nextSocket == null) return attachedLimb != null;
+        else return nextSocket.IsFullLimb() && attachedLimb != null;
     }
 
     public Limb.LimbValsMultiplier GetHeadMult()

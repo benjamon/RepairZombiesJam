@@ -504,11 +504,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 5545129336614549970}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 5173344783806345990}
   priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 2
 --- !u!58 &5173344782323180216
 CircleCollider2D:
@@ -625,11 +623,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 4917413968151256727}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 5173344783277174156}
   priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 2
 --- !u!58 &5173344782572975110
 CircleCollider2D:
@@ -683,6 +679,7 @@ Transform:
   m_LocalScale: {x: 0.5850043, y: 0.5850043, z: 0.5850043}
   m_Children:
   - {fileID: 5173344784361437640}
+  - {fileID: 3761736344135153792}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -800,6 +797,7 @@ MonoBehaviour:
   hopThreshold: 4
   MovementVal: 0
   DamageVal: 0
+  posture: 0
 --- !u!114 &3418688975054011609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,16 +837,16 @@ MonoBehaviour:
   confused: 0
   right: 1
   decision: 2
-  attackDistance: 0.5
+  attackDistance: 1.5
   idleDistance: 0.5
   idleReleaseDistance: 1
   rayMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1792
   target: 
   confusionTimer: 0
   maxConfusionTimer: 5
-  sensor: {fileID: 0}
+  sensor: {fileID: 3761736344135153792}
 --- !u!114 &6827365718788689569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,6 +862,11 @@ MonoBehaviour:
   action: 0
   posture: 0
   direction: 1
+  sensor: {fileID: 3761736344135153792}
+  rayMask:
+    serializedVersion: 2
+    m_Bits: 1792
+  attackDistance: 1.5
 --- !u!1 &5173344782923272874
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,11 +965,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 1191937678598047080}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 0}
   priorSocket: {fileID: 5173344783277174156}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 0
 --- !u!58 &5173344782923272870
 CircleCollider2D:
@@ -1082,11 +1083,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 7394897952157045242}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 0}
   priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 0
 --- !u!58 &5173344783181823078
 CircleCollider2D:
@@ -1203,11 +1202,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 4739870180021738075}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 5173344782923272871}
   priorSocket: {fileID: 5173344782572975111}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 1
 --- !u!58 &5173344783277174159
 CircleCollider2D:
@@ -1405,11 +1402,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 4596875689036923031}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 0}
   priorSocket: {fileID: 5173344783901272702}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 0
 --- !u!58 &5173344783386882084
 CircleCollider2D:
@@ -1526,11 +1521,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 5538061316668323508}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 5173344783651134741}
   priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 2
 --- !u!58 &5173344783599016175
 CircleCollider2D:
@@ -1545,9 +1538,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.34, y: -0.03}
+  m_Offset: {x: -0.07, y: -0.03}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.48
 --- !u!1 &5173344783651134744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,11 +1640,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 544311951588117605}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 5173344784318217901}
   priorSocket: {fileID: 5173344783599016172}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 1
 --- !u!58 &5173344783651134740
 CircleCollider2D:
@@ -1768,11 +1759,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 4107114461638770359}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 5173344783901272702}
   priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 2
 --- !u!58 &5173344783726753745
 CircleCollider2D:
@@ -1789,7 +1778,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.016232671, y: -0.11}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.48
 --- !u!1 &5173344783806345989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,11 +1878,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 2037640277641893858}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 5173344784039586129}
   priorSocket: {fileID: 5173344782323180217}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 1
 --- !u!58 &5173344783806345985
 CircleCollider2D:
@@ -2010,11 +1997,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 9219993321401785936}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 5173344783386882085}
   priorSocket: {fileID: 5173344783726753750}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 1
 --- !u!58 &5173344783901272697
 CircleCollider2D:
@@ -2130,11 +2115,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 5283373544487835290}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 0}
   priorSocket: {fileID: 5173344783806345990}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 0
 --- !u!58 &5173344784039586128
 CircleCollider2D:
@@ -2250,11 +2233,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlight: {fileID: 2789013028512920760}
   highlightColor: {r: 0.6320754, g: 0.08050018, b: 0.08050018, a: 0}
-  alphaDecay: 0.01
   nextSocket: {fileID: 0}
   priorSocket: {fileID: 5173344783651134741}
   torso: {fileID: 5173344782658056874}
-  currentLimbChildren: 0
   AvailableChildren: 0
 --- !u!58 &5173344784318217900
 CircleCollider2D:
@@ -2765,6 +2746,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7314690088248066294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3761736344135153792}
+  m_Layer: 8
+  m_Name: Sensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3761736344135153792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7314690088248066294}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.08, y: 3.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5173344782658056878}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7816956286870937906
 GameObject:
   m_ObjectHideFlags: 0
