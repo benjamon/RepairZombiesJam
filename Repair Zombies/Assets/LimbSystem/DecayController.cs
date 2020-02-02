@@ -5,7 +5,8 @@ using UnityEngine;
 public class DecayController : MonoBehaviour
 {
     private List<SocketHandler> sockets = new List<SocketHandler>();
-    float timer = 50f;
+
+    public float timer = 50f;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -13,7 +14,7 @@ public class DecayController : MonoBehaviour
         timer--;
         if (timer <= 0f)
         {
-            sockets[(int)Random.value * sockets.Count].LimbRandomDecay();
+            sockets[(int)(Random.value * sockets.Count)].LimbRandomDecay();
             timer = 50f;
         }
     }
