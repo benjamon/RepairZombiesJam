@@ -52,18 +52,16 @@ public class CameraMouseController : MonoBehaviour
             {
                 if (socket != null && socket.gameObject.layer == LayerMask.NameToLayer("Detachable"))
                     socket.Highlight();
+                
             } else
             {
                 if (socket != null && socket.CanAttachLimb(heldLimb))
                 {
                     socket.Highlight();
-                }
-                if (socket != null)
-                {
                     if (Input.GetMouseButtonUp(0))
                     {
-                        if (socket.CanAttachLimb(heldLimb))
-                            socket.AttachLimb(heldLimb);
+                        heldLimb.GetComponent<Rigidbody2D>().gravityScale = 1f;
+                        socket.AttachLimb(heldLimb);
                         heldLimb = null;
                     }
                 }
@@ -73,16 +71,12 @@ public class CameraMouseController : MonoBehaviour
             {
                 if (heldLimb == null)
                 {
-                    Debug.Log("A");
                     if (limb == null && socket != null)
                     {
-                        Debug.Log("DETACH");
                         if (socket.gameObject.layer == LayerMask.NameToLayer("Detachable"))
                             heldLimb = socket.DetachLimb();
-                        Debug.Log(socket.name);
                     } else if (limb != null)
                     {
-                        Debug.Log("GRAB LIMB");
                         heldLimb = limb;
                     }
                 }
@@ -90,7 +84,7 @@ public class CameraMouseController : MonoBehaviour
                 if (heldLimb != null)
                 {
                     heldLimb.GetComponent<Rigidbody2D>().gravityScale = 0f;
-                    SoundManager.PlaySound(Zound.Hit1, heldLimb.transform.position);
+                    SoundManager.PlaySound(3, heldLimb.transform.position);
                 }
             }
         } else

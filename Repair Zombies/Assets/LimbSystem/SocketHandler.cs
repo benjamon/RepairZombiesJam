@@ -10,8 +10,7 @@ public class SocketHandler : MonoBehaviour
     private SpriteRenderer highlight;
     [SerializeField]
     private Color highlightColor;
-    [SerializeField]
-    private float alphaDecay;
+    const float alphaDecay = .1f;
     [SerializeField]
     private SocketHandler nextSocket, priorSocket;
     [SerializeField]
@@ -227,9 +226,5 @@ public class SocketHandler : MonoBehaviour
         }
         GetComponent<CircleCollider2D>().radius = SOCKET_SIZE;
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("invader: " + collision.transform.name);
-    }
+    
 }

@@ -131,7 +131,9 @@ public class Limb : MonoBehaviour
         //{
         //    AttachedLimb.Highlight();
         //}
-        highlight.GetComponent<SpriteRenderer>().color = highlightColor;
+
+        highlight.sortingOrder = 100000;
+        highlight.color = highlightColor;
     }
 
     public bool TakeDamage(float damage)
