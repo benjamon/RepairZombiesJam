@@ -123,14 +123,14 @@ public class Limb : MonoBehaviour
 
     public void Highlight()
     {
-        if (joint2D.enabled)
-        {
-            joint2D.connectedBody.GetComponent<Limb>().Highlight();
-        }
-        else if(AttachedLimb != null)
-        {
-            AttachedLimb.Highlight();
-        }
+        //if (joint2D.enabled)
+        //{
+        //    joint2D.connectedBody.GetComponent<Limb>().Highlight();
+        //}
+        //else if(AttachedLimb != null)
+        //{
+        //    AttachedLimb.Highlight();
+        //}
         highlight.GetComponent<SpriteRenderer>().color = highlightColor;
     }
 

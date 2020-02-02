@@ -45,28 +45,27 @@ public class CameraMouseController : MonoBehaviour
             Limb limb = hit.collider.GetComponent<Limb>();
             SocketHandler socket = hit.collider.GetComponent<SocketHandler>();
 
+            if (limb != null)
+                limb.Highlight();
+
             if (heldLimb == null)
             {
-                if (hit.collider.GetComponent<SpriteRenderer>() != null)
-                {
-                    if (LastHighlighted != null)
-                        LastHighlighted.color = Color.white;
-                    LastHighlighted = hit.collider.GetComponent<SpriteRenderer>();
-                    LastHighlighted.color = Color.red;
-                    lastTimeHighlighted = Time.time;
-                }
-            } else 
+                if (socket != null && socket.gameObject.layer == LayerMask.NameToLayer("Detachable"))
+                    socket.Highlight();
+            } else
             {
-                if (LastHighlighted != null)
+                if (socket != null && socket.CanAttachLimb(heldLimb))
                 {
-                    LastHighlighted.color = Color.white;
-                    LastHighlighted = null;
+                    socket.Highlight();
                 }
-                if (socket != null && Input.GetMouseButtonUp(0))
+                if (socket != null)
                 {
-                    if (socket.CanAttachLimb(heldLimb))
-                        socket.AttachLimb(heldLimb);
-                    heldLimb = null;
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        if (socket.CanAttachLimb(heldLimb))
+                            socket.AttachLimb(heldLimb);
+                        heldLimb = null;
+                    }
                 }
             }
 
@@ -107,13 +106,6 @@ public class CameraMouseController : MonoBehaviour
         {
             heldLimb.GetComponent<Rigidbody2D>().gravityScale = 1f;
             heldLimb = null;
-        }
-
-        //PROBABLY REMOVE
-        if (LastHighlighted != null && Time.time - lastTimeHighlighted > .25f)
-        {
-            LastHighlighted.color = Color.white;
-            LastHighlighted = null;
         }
 
         if (heldLimb != null)

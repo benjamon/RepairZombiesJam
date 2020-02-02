@@ -41,8 +41,7 @@ public class SocketHandler : MonoBehaviour
 
     public bool CanAttachLimb(Limb _limb)
     {
-        if (gameObject.layer != LayerMask.NameToLayer("Attachable") 
-            || _limb.NumChildren > AvailableChildren) return false;
+        if (gameObject.layer != LayerMask.NameToLayer("Attachable")   || _limb.NumChildren > AvailableChildren) return false;
         Limb topLimb = _limb;
         while (topLimb.joint2D.enabled)
         {
@@ -208,14 +207,7 @@ public class SocketHandler : MonoBehaviour
 
     public void Highlight()
     {
-        if(gameObject.layer == LayerMask.NameToLayer("Attachable"))
-        {
             highlight.color = new Color(highlightColor.r, highlightColor.g, highlightColor.b, 1f);
-        }
-        else if (gameObject.layer == LayerMask.NameToLayer("Detachable"))
-        {
-            attachedLimb.Highlight();
-        }
     }
 
     private void Update()
