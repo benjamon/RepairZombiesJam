@@ -33,7 +33,7 @@ public class CameraMouseController : MonoBehaviour
         v.z = 0f;
         lastdelta = v;
         prev = v;
-        RaycastHit2D hit = Physics2D.CircleCast(v, .01f, Vector2.zero, 30f, LayerMask.GetMask("Zombie"));
+        RaycastHit2D hit = Physics2D.CircleCast(v, .01f, Vector2.zero, 30f, LayerMask.GetMask("ZombiePart"));
         if (LastHighlighted != null)
             LastHighlighted.color = Color.white;
         if (hit.transform != null)

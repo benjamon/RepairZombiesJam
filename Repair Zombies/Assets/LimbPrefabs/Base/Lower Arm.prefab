@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6515005538024051137}
   - component: {fileID: 2027793280647748880}
   - component: {fileID: -8462292228699605774}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lower Arm
   m_TagString: attachable
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6515005538024051137}
   - component: {fileID: -3657966324185075957}
   - component: {fileID: 6610016689099678642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Upper Leg
   m_TagString: attachable
   m_Icon: {fileID: 0}

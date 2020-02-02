@@ -13,8 +13,8 @@ public class Torso : MonoBehaviour, IDamageable
     [SerializeField]
     private int crawlThreshold, hopThreshold;
 
-    public float MovementVal { get; private set;}
-    public float DamageVal { get; private set; }
+    public float MovementVal;
+    public float DamageVal;
 
     private bool isAwake = false;
 

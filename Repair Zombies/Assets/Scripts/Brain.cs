@@ -36,7 +36,7 @@ public class Brain : MonoBehaviour
 
     private void NormalUpdate() {
         Decision newDecision = decision;
-        string newTarget = target;
+        string newTarget = "Zombie";
         var doDefault = true;
 
         var rayHit = getNearestRayHit();
@@ -74,7 +74,12 @@ public class Brain : MonoBehaviour
             right = true;
         }
 
-        if (decision != newDecision || target != newTarget) {
+        // start doing something new
+        //UpdateController(newDecision, right);
+        //decision = newDecision;
+        //target = newTarget;
+        if (decision != newDecision || target != newTarget)
+        {
             // start doing something new
             UpdateController(newDecision, right);
             decision = newDecision;
