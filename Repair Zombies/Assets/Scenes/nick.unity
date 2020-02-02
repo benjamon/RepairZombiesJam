@@ -4670,6 +4670,7 @@ GameObject:
   - component: {fileID: 1794886582}
   - component: {fileID: 1794886583}
   - component: {fileID: 1794886584}
+  - component: {fileID: 1794886585}
   m_Layer: 0
   m_Name: ZombieRoot
   m_TagString: Untagged
@@ -4814,6 +4815,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9e4058f33945b43b7269a14680c577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 1
+--- !u!114 &1794886585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794886577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e25c37ae1aff4cb2a82a935e3e156ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  head: {fileID: 0}
+  armFront: {fileID: 0}
+  armBack: {fileID: 0}
+  legBack: {fileID: 0}
+  legFront: {fileID: 0}
+  crawlThreshold: 0
+  hopThreshold: 0
+  MovementVal: 1
+  DamageVal: 0
 --- !u!1 &1798352960
 GameObject:
   m_ObjectHideFlags: 0

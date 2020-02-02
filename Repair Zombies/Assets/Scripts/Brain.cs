@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Brain : MonoBehaviour
 {
@@ -19,10 +17,11 @@ public class Brain : MonoBehaviour
     private string target = null;
     private float confusionTimer;
     private float maxConfusionTimer = 5.0f;
+    private ZombieController zombieController;
 
     void Start() {
         // get reference to torso component
-        
+        zombieController = this.GetComponent<ZombieController>();
     }
 
     void Update() {
@@ -77,6 +76,9 @@ public class Brain : MonoBehaviour
 
         if (decision != newDecision || target != newTarget) {
             // start doing something new
+            UpdateController(newDecision, right);
+            decision = newDecision;
+            target = newTarget;
         }
     }
 
@@ -104,6 +106,7 @@ public class Brain : MonoBehaviour
             }
             confusionTimer = maxConfusionTimer;
             // start doing something new
+            UpdateController(decision, right);
         }
         else if (decision == Decision.move) {
             var rayHit = getNearestRayHit();
@@ -127,6 +130,26 @@ public class Brain : MonoBehaviour
                 }
             }
             // start doing something new
+            UpdateController(decision, right);
+        }
+    }
+
+
+    private void UpdateController(Decision decision, bool right) {
+        switch (decision) {
+            case Decision.attack: {
+                zombieController.Attack();
+                break;
+            }
+            case Decision.move: {
+                zombieController.DirectionRight(right ? 1 : -1);
+                zombieController.Move();
+                break;
+            }
+            case Decision.idle: {
+                zombieController.Idle();
+                break;
+            }
         }
     }
 
