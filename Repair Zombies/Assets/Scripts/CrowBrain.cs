@@ -7,6 +7,7 @@ public class CrowBrain : MonoBehaviour
 {
     public float crowSpeed;
     Transform target;
+    Limb limb;
     List<GameObject> allWithTag = new List<GameObject>();
     public float xDir = 1f;
     bool gotPart;
@@ -37,6 +38,13 @@ public class CrowBrain : MonoBehaviour
             {
                 target.parent = null;
                 target.tag = "Untagged";
+                limb = target.GetComponent<Limb>();
+                if (target.parent != null)
+                {
+                    SocketHandler socket = target.parent.GetComponent<SocketHandler>();
+                    if (socket != null)
+                        limb = socket.DetachLimb();
+                }
                 grabJoint = gameObject.AddComponent<SpringJoint2D>();
                 grabJoint.connectedBody = target.GetComponent<Rigidbody2D>();
                 grabJoint.autoConfigureDistance = false;
@@ -49,6 +57,13 @@ public class CrowBrain : MonoBehaviour
             {
                 target = null;
             }
+        }
+
+        if (limb != null && grabJoint == null)
+        {
+            limb = null;
+            target = null;
+            gotPart = false;
         }
 
         if (grabJoint != null && target == null)
