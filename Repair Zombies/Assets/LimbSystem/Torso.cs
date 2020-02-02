@@ -32,6 +32,20 @@ public class Torso : MonoBehaviour
         
     }
 
+    private void TakeDamage(float damage)
+    {
+        List<SocketHandler> sockets = new List<SocketHandler>();
+
+        if (!armFront.IsAttachable) sockets.Add(armFront);
+        if (!armBack.IsAttachable) sockets.Add(armBack);
+        if (!legFront.IsAttachable) sockets.Add(legFront);
+        if (!legBack.IsAttachable) sockets.Add(legBack);
+        if (!head.IsAttachable) sockets.Add(head);
+
+        sockets[(int)UnityEngine.Random.value * sockets.Count].TakeDamage(damage);
+    
+    }
+
     public void GetLimbVals() 
     {
         MovementVal = 0;

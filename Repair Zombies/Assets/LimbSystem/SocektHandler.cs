@@ -105,6 +105,34 @@ public class SocketHandler : MonoBehaviour
         return attachedLimb.HeadMult;
     }
 
+    public void TakeDamage(float damage)
+    {
+        if(nextSocket.attachedLimb == null || Random.Range(0f, 1.0f) > 0.5f)
+        {
+            attachedLimb.Health -= damage;
+        }
+        else
+        {
+            nextSocket.TakeDamage(damage);
+        }
+    }
+
+    public void LimbRandomDecay()
+    {
+        if(attachedLimb != null)
+        {
+            float r = Random.Range(1f - attachedLimb.Health, 1f);
+            if (r > 0.9)
+            {
+                DetachLimb();
+            }
+            else
+            {
+                attachedLimb.Health -= r * 0.125f;
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -49,6 +49,7 @@ public class Limb : MonoBehaviour
     public LimbValsMultiplier HeadMult { get; }
     public bool IsExtremity { get; }
     public bool IsHead { get; }
+    public float Health { get; set; }
 
 
     public LimbVals GetVals()
