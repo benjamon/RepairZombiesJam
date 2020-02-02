@@ -7,6 +7,12 @@ public class SocketHandler : MonoBehaviour
 {
     public Limb attachedLimb { get; private set;  }
     [SerializeField]
+    private SpriteRenderer highlight;
+    [SerializeField]
+    private Color highlightColor;
+    [SerializeField]
+    private float alphaDecay;
+    [SerializeField]
     private SocketHandler nextSocket, priorSocket;
     [SerializeField]
     private Torso torso;
@@ -204,12 +210,17 @@ public class SocketHandler : MonoBehaviour
     {
         if(gameObject.layer == LayerMask.NameToLayer("Attachable"))
         {
-
+            highlight.color = new Color(highlightColor.r, highlightColor.g, highlightColor.b, 1f);
         }
         else if (gameObject.layer == LayerMask.NameToLayer("Detachable"))
         {
             attachedLimb.Highlight();
         }
+    }
+
+    private void Update()
+    {
+        highlight.color = new Color(highlight.color.r, highlight.color.g, highlight.color.b, highlight.color.a - alphaDecay);
     }
 
     const float SOCKET_SIZE = .55f;

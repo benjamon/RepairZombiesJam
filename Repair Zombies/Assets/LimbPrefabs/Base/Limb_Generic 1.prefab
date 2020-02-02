@@ -135,8 +135,11 @@ MonoBehaviour:
     damageMult: 0
   IsExtremity: 0
   IsHead: 0
-  Health: 1
+  IsDecomposable: 0
+  MaxHealth: 0
   AttachedLimb: {fileID: 0}
+  highlightColor: {r: 0.3233736, g: 0.5943396, b: 0.3224012, a: 0}
+  alphaDecay: 0.01
 --- !u!50 &-4355664644326304203
 Rigidbody2D:
   serializedVersion: 4
