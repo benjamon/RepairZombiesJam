@@ -50,15 +50,20 @@ public class Limb : MonoBehaviour
     public bool IsExtremity;
     [SerializeField]
     public bool IsHead;
-    [SerializeField]
+    [NonSerialized]
     public float Health;
+    [SerializeField]
+    private float MaxHealth;
     [SerializeField]
     public Limb AttachedLimb;
 
     public int NumChildren { get; private set; }
+    public Joint2D joint2D { get; private set; }
 
     private Rigidbody2D rigidBody2D;
-    private Joint2D joint2D;
+
+    //HOOK INTO HIGHLIGHT TO AUTOMATICALLY HIGHLIGHT ALL LIMBS
+    //NO OTHER METHODS NECESSARY
 
     public LimbVals GetVals()
     {
@@ -92,7 +97,7 @@ public class Limb : MonoBehaviour
         rigidBody2D.simulated = false;
         joint2D.connectedBody = null;
         joint2D.enabled = false;
-
+        FindObjectOfType<DecayController>().DeregisterLimb(this);
     }
 
     public void DetachFromBody()
@@ -100,12 +105,47 @@ public class Limb : MonoBehaviour
         transform.parent = null;
         rigidBody2D.isKinematic = false;
         rigidBody2D.simulated = true;
+        FindObjectOfType<DecayController>().RegisterLimb(this);
 
-        if(AttachedLimb != null)
+        if (AttachedLimb != null)
         {
             AttachedLimb.joint2D.enabled = true;
             AttachedLimb.joint2D.connectedBody = rigidBody2D;
         }
+    }
+
+    public void Highlight()
+    {
+        if (joint2D.enabled)
+        {
+            joint2D.connectedBody.GetComponent<Limb>().Highlight();
+        }
+        else if(AttachedLimb != null)
+        {
+            AttachedLimb.Highlight();
+        }
+    }
+
+    public bool TakeDamage(float damage)
+    {
+        Health -= damage;
+        return (Health <= 0);
+    }
+
+    public void DestroyLimb()
+    {
+        FindObjectOfType<DecayController>().DeregisterLimb(this);
+        if (joint2D.enabled)
+        {
+            joint2D.connectedBody.GetComponent<Limb>().DetachAllChildren();
+        }
+        if (AttachedLimb != null && AttachedLimb.joint2D.enabled)
+        {
+            AttachedLimb.joint2D.enabled = false;
+            AttachedLimb.joint2D.connectedBody = null;
+        }
+
+        Destroy(this);
     }
 
     // Start is called before the first frame update
@@ -113,5 +153,9 @@ public class Limb : MonoBehaviour
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         joint2D = GetComponent<Joint2D>();
+        joint2D.enabled = false;
+        joint2D.connectedBody = null;
+        FindObjectOfType<DecayController>().RegisterLimb(this);
+        Health = MaxHealth;
     }
 }

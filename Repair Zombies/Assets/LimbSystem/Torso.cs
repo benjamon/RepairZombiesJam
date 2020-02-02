@@ -15,23 +15,32 @@ public class Torso : MonoBehaviour, IDamageable
 
     public float MovementVal;
     public float DamageVal;
+    public int movementState = 2;
 
     private bool isAwake = false;
 
-    private int movementState = 2;
 
+    //USE MOVEMENTVAL TO GET MOVEMENT SPEED
+    //USE DAMAGEVAL TO GET DAMAGE STAT
+    //USE MOVEMENTSTATE TO TELL WHETHER TO CRAWL HOP OR WALK
+    //USE DEAL DAMAGE TO DEAL DAMAGE TO THE ZOMBIE
+    //USE HASHEAD TO GET WHETHER OR NOT THE ZOMBIE HAS A USABLE HEAD
 
-
-    // Start is called before the first frame update
-    void Start()
+    
+    void Awake()
     {
         GetComponent<InitialZombieParts>().AttachAll();
     }
 
-    void LateStart()
+    void Start()
     {
         isAwake = true;
         GetLimbVals();
+    }
+
+    public bool HasHead()
+    {
+        return head.attachedLimb != null && head.attachedLimb.IsHead;
     }
 
     public void GetLimbVals() 
@@ -87,11 +96,11 @@ public class Torso : MonoBehaviour, IDamageable
     {
         List<SocketHandler> sockets = new List<SocketHandler>();
 
-        if (!armFront.IsAttachable) sockets.Add(armFront);
-        if (!armBack.IsAttachable) sockets.Add(armBack);
-        if (!legFront.IsAttachable) sockets.Add(legFront);
-        if (!legBack.IsAttachable) sockets.Add(legBack);
-        if (!head.IsAttachable) sockets.Add(head);
+        if (armFront.gameObject.layer == LayerMask.NameToLayer("Detachable")) sockets.Add(armFront);
+        if (armBack.gameObject.layer == LayerMask.NameToLayer("Detachable")) sockets.Add(armBack);
+        if (legFront.gameObject.layer == LayerMask.NameToLayer("Detachable")) sockets.Add(legFront);
+        if (legBack.gameObject.layer == LayerMask.NameToLayer("Detachable")) sockets.Add(legBack);
+        if (head.gameObject.layer == LayerMask.NameToLayer("Detachable")) sockets.Add(head);
 
         sockets[(int)(UnityEngine.Random.value * sockets.Count)].TakeDamage(damage);
     }

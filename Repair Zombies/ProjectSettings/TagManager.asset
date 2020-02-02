@@ -18,9 +18,9 @@ TagManager:
   - Obstacle
   - Enemy
   - ZombiePart
-  - 
-  - 
-  - 
+  - Attachable
+  - Detachable
+  - Inactive
   - 
   - 
   - 

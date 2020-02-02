@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public class SocketHandler : MonoBehaviour
 {
-    private Limb attachedLimb, priorLimb = null;
+    public Limb attachedLimb { get; private set;  }
+    private Limb priorLimb = null;
     [SerializeField]
     private SocketHandler nextSocket;
     [SerializeField]
@@ -14,29 +15,55 @@ public class SocketHandler : MonoBehaviour
     private Collider2D cod;
 
     [SerializeField]
-    public int AvailableChildren { get; private set; }
+    public int AvailableChildren;
 
+    //USE CANATTACHLIMB TO CHECK FOR ATTACHABILITY. ANY LIMB CAN BE PASSED IN, INLCUDING MIDDLE PIECES
+    //USE ATTACHLIMB TO ATTACH A LIMB. ANY LIMB CAN BE PASSED IN, INLCUDING MIDDLE PIECES
+    //USE DETACHLIMB TO DETACH A LIMB AND ALL ITS CHILDREN
+    //USE HIGHLIGHT TO AUTOMATICALLY HIGHLIGHT FOR BOTH ATTACHING AND DETACHING
+
+
+    public bool CanAttachLimb(Limb _limb)
+    {
+        if (gameObject.layer != LayerMask.NameToLayer("Attachable") 
+            || _limb.NumChildren > AvailableChildren) return false;
+        Limb topLimb = _limb;
+        while (topLimb.joint2D.enabled)
+        {
+            topLimb = topLimb.joint2D.connectedBody.GetComponent<Limb>();
+            if (topLimb.NumChildren > AvailableChildren) return false;
+        }
+
+        return true;
+    }
 
     public void AttachLimb(Limb _limb)
     {
-        if (priorLimb != null)
+        Limb topLimb = _limb;
+        while (topLimb.joint2D.enabled)
         {
-            priorLimb.AttachChild(_limb);
+            topLimb = topLimb.joint2D.connectedBody.GetComponent<Limb>();
         }
 
-        attachedLimb = _limb;
-        _limb.AttachToBody(transform);
-        tag = "Detachable";
-
-        if (nextSocket != null) 
+        if (priorLimb != null)
         {
-            if (_limb.AttachedLimb == null)
+            priorLimb.AttachChild(topLimb);
+        }
+
+        attachedLimb = topLimb;
+        topLimb.AttachToBody(transform);
+        gameObject.layer = LayerMask.NameToLayer("Detachable");
+        FindObjectOfType<DecayController>().RegisterSocket(this);
+
+        if (nextSocket != null && !topLimb.IsExtremity) 
+        {
+            if (topLimb.AttachedLimb == null)
             {
-                nextSocket.tag = "Attachable";
+                nextSocket.gameObject.layer = LayerMask.NameToLayer("Attachable");
             }
-            else if (!_limb.IsExtremity)
+            else
             {
-                nextSocket.ChainAttach(_limb.AttachedLimb);
+                nextSocket.ChainAttach(topLimb.AttachedLimb);
             }
         }
 
@@ -47,15 +74,16 @@ public class SocketHandler : MonoBehaviour
     {
         attachedLimb = _limb;
         _limb.AttachToBody(transform);
-        tag = "Detachable";
+        gameObject.layer = LayerMask.NameToLayer("Detachable");
+        FindObjectOfType<DecayController>().RegisterSocket(this);
 
-        if (nextSocket != null)
+        if (nextSocket != null && !_limb.IsExtremity)
         {
             if (_limb.AttachedLimb == null)
             {
-                nextSocket.tag = "Attachable";
+                nextSocket.gameObject.layer = LayerMask.NameToLayer("Attachable");
             }
-            else if (!_limb.IsExtremity)
+            else
             {
                 nextSocket.ChainAttach(_limb.AttachedLimb);
             }
@@ -69,8 +97,9 @@ public class SocketHandler : MonoBehaviour
             priorLimb.DetachAllChildren();
         }
 
-        tag = "Attachable";
+        gameObject.layer = LayerMask.NameToLayer("Attachable");
         attachedLimb.DetachFromBody();
+        FindObjectOfType<DecayController>().DeregisterSocket(this);
 
         if (nextSocket != null && nextSocket.attachedLimb != null)
         {
@@ -84,7 +113,8 @@ public class SocketHandler : MonoBehaviour
     private void ChainDetach()
     {
         attachedLimb.DetachFromBody();
-        tag = "Inactive";
+        gameObject.layer = LayerMask.NameToLayer("Inactive");
+        FindObjectOfType<DecayController>().DeregisterSocket(this);
 
         if (nextSocket != null && nextSocket.attachedLimb != null)
         {
@@ -96,7 +126,16 @@ public class SocketHandler : MonoBehaviour
 
     public Limb.LimbVals GetVals()
     {
-        if (nextSocket.attachedLimb != null)
+        if(attachedLimb == null)
+        {
+            return new Limb.LimbVals
+            {
+                movementVal = -1f,
+                damageVal = -1f,
+                legScore = -1
+            };
+        }
+        if (nextSocket != null && nextSocket.attachedLimb != null)
         {
             return attachedLimb.GetVals().Add(nextSocket.GetVals());
         }
@@ -105,6 +144,14 @@ public class SocketHandler : MonoBehaviour
 
     public Limb.LimbValsMultiplier GetHeadMult()
     {
+        if (attachedLimb == null)
+        {
+            return new Limb.LimbValsMultiplier
+            {
+                movementMult = 0.5f,
+                damageMult = 0.5f
+            };
+        }
         return attachedLimb.HeadMult;
     }
 
@@ -112,7 +159,12 @@ public class SocketHandler : MonoBehaviour
     {
         if(nextSocket.attachedLimb == null || Random.Range(0f, 1.0f) > 0.5f)
         {
-            attachedLimb.Health -= damage;
+            if (attachedLimb.TakeDamage(damage))
+            {
+                Limb temp = attachedLimb;
+                DetachLimb();
+                temp.DestroyLimb();
+            }
         }
         else
         {
@@ -120,19 +172,33 @@ public class SocketHandler : MonoBehaviour
         }
     }
 
-    public void LimbRandomDecay()
+    public void LimbRandomDecay(float damage)
     {
         if(attachedLimb != null)
         {
-            float r = Random.Range(1f - attachedLimb.Health, 1f);
-            if (r > 0.9)
+            float r = Random.Range(attachedLimb.Health*0.25f, attachedLimb.Health);
+            if (r < 0.25)
             {
                 DetachLimb();
             }
-            else
+            else if(attachedLimb.TakeDamage(damage))
             {
-                attachedLimb.Health -= r * 0.125f;
+                Limb temp = attachedLimb;
+                DetachLimb();
+                temp.DestroyLimb();
             }
+        }
+    }
+
+    public void Highlight()
+    {
+        if(gameObject.layer == LayerMask.NameToLayer("Attachable"))
+        {
+
+        }
+        else if (gameObject.layer == LayerMask.NameToLayer("Detachable"))
+        {
+            attachedLimb.Highlight();
         }
     }
 
@@ -141,8 +207,6 @@ public class SocketHandler : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        FindObjectOfType<DecayController>().RegisterSocket(this);
-
         if (GetComponent<CircleCollider2D>() == null)
         {
             cod = gameObject.AddComponent<CircleCollider2D>();
