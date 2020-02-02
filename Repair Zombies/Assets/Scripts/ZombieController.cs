@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ZombieController : MonoBehaviour {
     private Animator animator;
-    // private TorsoComponent torso;
+    private Torso torso;
+    
     void Start() {
-        // get the torso
+        torso = this.GetComponent<Torso>();
         animator = this.GetComponent<Animator>();
     }
 
@@ -27,6 +28,6 @@ public class ZombieController : MonoBehaviour {
     }
 
     private void Crawl() {
-        
+
     }
 }
