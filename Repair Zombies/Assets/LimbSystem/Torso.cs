@@ -83,30 +83,12 @@ public class Torso : MonoBehaviour, IDamageable
 
     private void GetMovementState(int legScore)
     {
-        if (legBack.attachedLimb == null && legFront.attachedLimb == null) posture = PostureState.Crawl;
-        else if (legBack.attachedLimb == null)
-        {
-            if (legFront.attachedLimb.NumChildren <= 1) posture = PostureState.Crawl;
-            else posture = PostureState.Hobble;
-        }
-        else if (legFront.attachedLimb == null)
-        {
-            if (legBack.attachedLimb.NumChildren <= 1) posture = PostureState.Crawl;
-            else posture = PostureState.Hobble;
-        }
-        else if (legBack.attachedLimb.NumChildren <= 1 && legFront.attachedLimb.NumChildren <= 1) posture = PostureState.Crawl;
-        else if (legBack.attachedLimb.NumChildren <= 1 || legFront.attachedLimb.NumChildren <= 1) posture = PostureState.Hobble;
-        else posture = PostureState.Stand;
-
-
-        if (legScore <= crawlThreshold && (posture == PostureState.Hobble || posture == PostureState.Stand))
-        {
+        if (legScore <= crawlThreshold || (legFront.CurrentLimbChildren <= 1 && legBack.CurrentLimbChildren <= 1))
             posture = PostureState.Crawl;
-        }
-        else if (legScore <= hopThreshold && posture == PostureState.Stand)
-        {
+        else if (legScore <= hopThreshold || (legFront.CurrentLimbChildren <= 1 || legBack.CurrentLimbChildren <= 1))
             posture = PostureState.Hobble;
-        }
+        else
+            posture = PostureState.Stand;
     }
 
     public void DealDamage(float damage)
