@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6515005538024051137}
   - component: {fileID: -276913688501508260}
   - component: {fileID: -826490113549109658}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lower Leg
   m_TagString: attachable
   m_Icon: {fileID: 0}

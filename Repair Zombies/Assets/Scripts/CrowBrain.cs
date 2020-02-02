@@ -37,14 +37,12 @@ public class CrowBrain : MonoBehaviour
             {
                 target.parent = null;
                 target.tag = "Untagged";
-                Rigidbody2D body=  target.gameObject.AddComponent<Rigidbody2D>();
-                body.drag = 1f;
-                body.angularDrag = 1f;
                 grabJoint = gameObject.AddComponent<SpringJoint2D>();
                 grabJoint.connectedBody = target.GetComponent<Rigidbody2D>();
                 grabJoint.autoConfigureDistance = false;
                 grabJoint.distance = holdDistance;
                 grabJoint.frequency = 5f;
+                grabJoint.breakForce = 240f;
                 gotPart = true;
                 SoundManager.PlaySound(Zound.CrowCaw, transform.position);
             } else if (xDir > 0f != transform.position.x < target.position.x || (!gotPart && target.tag != "attached"))

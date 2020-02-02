@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 5173344782658056875}
   - component: {fileID: 5173344782658056874}
   - component: {fileID: 3418688975054011609}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ZombieRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,6 +377,8 @@ MonoBehaviour:
   legFront: {fileID: 5173344782323180217}
   crawlThreshold: 2
   hopThreshold: 4
+  MovementVal: 0
+  DamageVal: 0
 --- !u!114 &3418688975054011609
 MonoBehaviour:
   m_ObjectHideFlags: 0
