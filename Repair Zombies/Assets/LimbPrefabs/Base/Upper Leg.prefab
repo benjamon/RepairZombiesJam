@@ -124,18 +124,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limbValsBase:
-    movementVal: 0
-    damageVal: 0
-    legScore: 0
+    movementVal: 2
+    damageVal: 1
+    legScore: 1
   extremityMult:
-    movementMult: 0
-    damageMult: 0
+    movementMult: 0.8
+    damageMult: 1.5
   HeadMult:
-    movementMult: 0
-    damageMult: 0
+    movementMult: 1.5
+    damageMult: 0.5
   IsExtremity: 0
   IsHead: 0
-  Health: 1
+  IsDecomposable: 1
+  MaxHealth: 1
   AttachedLimb: {fileID: 0}
 --- !u!50 &-3657966324185075957
 Rigidbody2D:

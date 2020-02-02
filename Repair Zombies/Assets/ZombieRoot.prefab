@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5173344782323180222}
   - component: {fileID: 5173344782323180217}
   - component: {fileID: 5173344782323180216}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Front_Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344783806345990}
+  priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 2
 --- !u!58 &5173344782323180216
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -126,7 +128,7 @@ GameObject:
   - component: {fileID: 5173344782572975108}
   - component: {fileID: 5173344782572975111}
   - component: {fileID: 5173344782572975110}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Back_Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +213,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344783277174156}
+  priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 2
 --- !u!58 &5173344782572975110
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -243,6 +247,8 @@ GameObject:
   - component: {fileID: 5173344782658056875}
   - component: {fileID: 5173344782658056874}
   - component: {fileID: 3418688975054011609}
+  - component: {fileID: 4437044892042535998}
+  - component: {fileID: 6827365718788689569}
   m_Layer: 8
   m_Name: ZombieRoot
   m_TagString: Untagged
@@ -403,6 +409,37 @@ MonoBehaviour:
   armBackSocket: {fileID: 5173344783599016172}
   legFrontSocket: {fileID: 5173344782323180217}
   legBackSocket: {fileID: 5173344782572975111}
+--- !u!114 &4437044892042535998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173344782658056876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b407efe4597001542822174c74bf5615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confused: 0
+  right: 1
+  decision: 2
+  attackDistance: 0.5
+  idleDistance: 0.5
+  idleReleaseDistance: 1
+--- !u!114 &6827365718788689569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173344782658056876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9e4058f33945b43b7269a14680c577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 1
 --- !u!1 &5173344782923272874
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +452,7 @@ GameObject:
   - component: {fileID: 5173344782923272868}
   - component: {fileID: 5173344782923272871}
   - component: {fileID: 5173344782923272870}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Back_Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +536,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 0}
+  priorSocket: {fileID: 5173344783277174156}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 0
 --- !u!58 &5173344782923272870
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -528,7 +567,7 @@ GameObject:
   - component: {fileID: 5173344783181823076}
   - component: {fileID: 5173344783181823079}
   - component: {fileID: 5173344783181823078}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +651,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 0}
+  priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 0
 --- !u!58 &5173344783181823078
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -641,7 +682,7 @@ GameObject:
   - component: {fileID: 5173344783277174157}
   - component: {fileID: 5173344783277174156}
   - component: {fileID: 5173344783277174159}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Back_Knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -726,7 +767,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344782923272871}
+  priorSocket: {fileID: 5173344782572975111}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 1
 --- !u!58 &5173344783277174159
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -837,7 +880,7 @@ GameObject:
   - component: {fileID: 5173344783386882090}
   - component: {fileID: 5173344783386882085}
   - component: {fileID: 5173344783386882084}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Front_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -921,7 +964,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 0}
+  priorSocket: {fileID: 5173344783901272702}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 0
 --- !u!58 &5173344783386882084
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -950,7 +995,7 @@ GameObject:
   - component: {fileID: 5173344783599016173}
   - component: {fileID: 5173344783599016172}
   - component: {fileID: 5173344783599016175}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Back_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1035,7 +1080,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344783651134741}
+  priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 2
 --- !u!58 &5173344783599016175
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1064,7 +1111,7 @@ GameObject:
   - component: {fileID: 5173344783651134746}
   - component: {fileID: 5173344783651134741}
   - component: {fileID: 5173344783651134740}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Back_Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1149,7 +1196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344784318217901}
+  priorSocket: {fileID: 5173344783599016172}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 1
 --- !u!58 &5173344783651134740
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1178,7 +1227,7 @@ GameObject:
   - component: {fileID: 5173344783726753751}
   - component: {fileID: 5173344783726753750}
   - component: {fileID: 5173344783726753745}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Front_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1263,7 +1312,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344783901272702}
+  priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 2
 --- !u!58 &5173344783726753745
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1292,7 +1343,7 @@ GameObject:
   - component: {fileID: 5173344783806345991}
   - component: {fileID: 5173344783806345990}
   - component: {fileID: 5173344783806345985}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Front_Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1377,7 +1428,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344784039586129}
+  priorSocket: {fileID: 5173344782323180217}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 1
 --- !u!58 &5173344783806345985
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1406,7 +1459,7 @@ GameObject:
   - component: {fileID: 5173344783901272703}
   - component: {fileID: 5173344783901272702}
   - component: {fileID: 5173344783901272697}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Front_Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1491,7 +1544,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344783386882085}
+  priorSocket: {fileID: 5173344783726753750}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 1
 --- !u!58 &5173344783901272697
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1520,7 +1575,7 @@ GameObject:
   - component: {fileID: 5173344784039586134}
   - component: {fileID: 5173344784039586129}
   - component: {fileID: 5173344784039586128}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Front_Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1604,7 +1659,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 0}
+  priorSocket: {fileID: 5173344783806345990}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 0
 --- !u!58 &5173344784039586128
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1633,7 +1690,7 @@ GameObject:
   - component: {fileID: 5173344784318217906}
   - component: {fileID: 5173344784318217901}
   - component: {fileID: 5173344784318217900}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Back_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1717,7 +1774,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 0}
+  priorSocket: {fileID: 5173344783651134741}
   torso: {fileID: 5173344782658056874}
+  AvailableChildren: 0
 --- !u!58 &5173344784318217900
 CircleCollider2D:
   m_ObjectHideFlags: 0
