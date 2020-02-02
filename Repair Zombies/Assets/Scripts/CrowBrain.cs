@@ -37,9 +37,9 @@ public class CrowBrain : MonoBehaviour
             {
                 target.parent = null;
                 target.tag = "Untagged";
-                Rigidbody2D body=  target.gameObject.AddComponent<Rigidbody2D>();
-                body.drag = 1f;
-                body.angularDrag = 1f;
+                //Rigidbody2D body=  target.gameObject.AddComponent<Rigidbody2D>();
+                //body.drag = 1f;
+                //body.angularDrag = 1f;
                 grabJoint = gameObject.AddComponent<SpringJoint2D>();
                 grabJoint.connectedBody = target.GetComponent<Rigidbody2D>();
                 grabJoint.autoConfigureDistance = false;
