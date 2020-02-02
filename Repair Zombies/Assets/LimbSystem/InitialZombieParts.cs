@@ -13,23 +13,23 @@ public class InitialZombieParts : MonoBehaviour
 
         if (head != null)
         {
-            headSocket.AttachLimb(head.BuildLimb());
+            headSocket.AttachLimb(head.BuildLimb(transform.position));
         }
         if (armFront != null)
         {
-            armFrontSocket.AttachLimb(armFront.BuildLimb());
+            armFrontSocket.AttachLimb(armFront.BuildLimb(transform.position));
         }
         if (armBack != null)
         {
-            armBackSocket.AttachLimb(armBack.BuildLimb());
+            armBackSocket.AttachLimb(armBack.BuildLimb(transform.position));
         }
         if (legFront != null)
         {
-            legFrontSocket.AttachLimb(legFront.BuildLimb());
+            legFrontSocket.AttachLimb(legFront.BuildLimb(transform.position));
         }
         if (legBack != null)
         {
-            legBackSocket.AttachLimb(legBack.BuildLimb());
+            legBackSocket.AttachLimb(legBack.BuildLimb(transform.position));
         }
     }
 }

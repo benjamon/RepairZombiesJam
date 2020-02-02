@@ -84,9 +84,15 @@ public class Limb : MonoBehaviour
     public void AttachToBody(Transform _socket)
     {
         transform.parent = _socket;
+        transform.localPosition = Vector3.zero;
+        transform.localScale = Vector3.one;
+        transform.localRotation = Quaternion.identity;
+        GetComponent<SpriteRenderer>().sortingOrder = _socket.GetComponent<SpriteRenderer>().sortingOrder;
         rigidBody2D.isKinematic = true;
         rigidBody2D.simulated = false;
         joint2D.connectedBody = null;
+        joint2D.enabled = false;
+
     }
 
     public void DetachFromBody()
@@ -97,16 +103,15 @@ public class Limb : MonoBehaviour
 
         if(AttachedLimb != null)
         {
+            AttachedLimb.joint2D.enabled = true;
             AttachedLimb.joint2D.connectedBody = rigidBody2D;
         }
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         joint2D = GetComponent<Joint2D>();
-
-        AttachChild(AttachedLimb);
     }
 }
