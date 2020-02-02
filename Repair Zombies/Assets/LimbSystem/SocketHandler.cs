@@ -11,12 +11,10 @@ public class SocketHandler : MonoBehaviour
     [SerializeField]
     private Torso torso;
 
+    private Collider2D cod;
+
     [SerializeField]
     public int AvailableChildren { get; private set; }
-
-    public bool IsAttachable { get; private set; }
-
-    public bool IsRemoveAble() { return attachedLimb != null; }
 
 
     public void AttachLimb(Limb _limb)
@@ -28,13 +26,13 @@ public class SocketHandler : MonoBehaviour
 
         attachedLimb = _limb;
         _limb.AttachToBody(transform);
-        IsAttachable = false;
+        tag = "Detachable";
 
         if (nextSocket != null) 
         {
             if (_limb.AttachedLimb == null)
             {
-                nextSocket.IsAttachable = true;
+                nextSocket.tag = "Attachable";
             }
             else if (!_limb.IsExtremity)
             {
@@ -49,13 +47,13 @@ public class SocketHandler : MonoBehaviour
     {
         attachedLimb = _limb;
         _limb.AttachToBody(transform);
-        IsAttachable = false;
+        tag = "Detachable";
 
         if (nextSocket != null)
         {
             if (_limb.AttachedLimb == null)
             {
-                nextSocket.IsAttachable = true;
+                nextSocket.tag = "Attachable";
             }
             else if (!_limb.IsExtremity)
             {
@@ -71,14 +69,13 @@ public class SocketHandler : MonoBehaviour
             priorLimb.DetachAllChildren();
         }
 
-        IsAttachable = true;
+        tag = "Attachable";
         attachedLimb.DetachFromBody();
 
-        if (nextSocket != null && attachedLimb.AttachedLimb != null)
+        if (nextSocket != null && nextSocket.attachedLimb != null)
         {
             nextSocket.ChainDetach();
         }
-
         attachedLimb = null;
 
         torso.GetLimbVals();
@@ -87,8 +84,9 @@ public class SocketHandler : MonoBehaviour
     private void ChainDetach()
     {
         attachedLimb.DetachFromBody();
+        tag = "Inactive";
 
-        if (nextSocket != null && attachedLimb.AttachedLimb != null)
+        if (nextSocket != null && nextSocket.attachedLimb != null)
         {
             nextSocket.ChainDetach();
         }
@@ -147,7 +145,7 @@ public class SocketHandler : MonoBehaviour
 
         if (GetComponent<CircleCollider2D>() == null)
         {
-            CircleCollider2D cod = gameObject.AddComponent<CircleCollider2D>();
+            cod = gameObject.AddComponent<CircleCollider2D>();
             cod.isTrigger = true;
         }
         GetComponent<CircleCollider2D>().radius = SOCKET_SIZE;

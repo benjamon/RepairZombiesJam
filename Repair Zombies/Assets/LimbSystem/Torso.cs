@@ -93,6 +93,6 @@ public class Torso : MonoBehaviour, IDamageable
         if (!legBack.IsAttachable) sockets.Add(legBack);
         if (!head.IsAttachable) sockets.Add(head);
 
-        sockets[(int)UnityEngine.Random.value * sockets.Count].TakeDamage(damage);
+        sockets[(int)(UnityEngine.Random.value * sockets.Count)].TakeDamage(damage);
     }
 }
