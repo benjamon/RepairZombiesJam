@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344783806345990}
+  priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 2
 --- !u!58 &5173344782323180216
@@ -212,6 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344783277174156}
+  priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 2
 --- !u!58 &5173344782572975110
@@ -245,6 +247,8 @@ GameObject:
   - component: {fileID: 5173344782658056875}
   - component: {fileID: 5173344782658056874}
   - component: {fileID: 3418688975054011609}
+  - component: {fileID: 4437044892042535998}
+  - component: {fileID: 6827365718788689569}
   m_Layer: 8
   m_Name: ZombieRoot
   m_TagString: Untagged
@@ -381,7 +385,6 @@ MonoBehaviour:
   hopThreshold: 4
   MovementVal: 0
   DamageVal: 0
-  movementState: 2
 --- !u!114 &3418688975054011609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +409,37 @@ MonoBehaviour:
   armBackSocket: {fileID: 5173344783599016172}
   legFrontSocket: {fileID: 5173344782323180217}
   legBackSocket: {fileID: 5173344782572975111}
+--- !u!114 &4437044892042535998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173344782658056876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b407efe4597001542822174c74bf5615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confused: 0
+  right: 1
+  decision: 2
+  attackDistance: 0.5
+  idleDistance: 0.5
+  idleReleaseDistance: 1
+--- !u!114 &6827365718788689569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173344782658056876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9e4058f33945b43b7269a14680c577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 1
 --- !u!1 &5173344782923272874
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,6 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 0}
+  priorSocket: {fileID: 5173344783277174156}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 0
 --- !u!58 &5173344782923272870
@@ -616,6 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 0}
+  priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 0
 --- !u!58 &5173344783181823078
@@ -731,6 +767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344782923272871}
+  priorSocket: {fileID: 5173344782572975111}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 1
 --- !u!58 &5173344783277174159
@@ -927,6 +964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 0}
+  priorSocket: {fileID: 5173344783901272702}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 0
 --- !u!58 &5173344783386882084
@@ -1042,6 +1080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344783651134741}
+  priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 2
 --- !u!58 &5173344783599016175
@@ -1157,6 +1196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344784318217901}
+  priorSocket: {fileID: 5173344783599016172}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 1
 --- !u!58 &5173344783651134740
@@ -1272,6 +1312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344783901272702}
+  priorSocket: {fileID: 0}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 2
 --- !u!58 &5173344783726753745
@@ -1387,6 +1428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344784039586129}
+  priorSocket: {fileID: 5173344782323180217}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 1
 --- !u!58 &5173344783806345985
@@ -1502,6 +1544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 5173344783386882085}
+  priorSocket: {fileID: 5173344783726753750}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 1
 --- !u!58 &5173344783901272697
@@ -1616,6 +1659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 0}
+  priorSocket: {fileID: 5173344783806345990}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 0
 --- !u!58 &5173344784039586128
@@ -1730,6 +1774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSocket: {fileID: 0}
+  priorSocket: {fileID: 5173344783651134741}
   torso: {fileID: 5173344782658056874}
   AvailableChildren: 0
 --- !u!58 &5173344784318217900

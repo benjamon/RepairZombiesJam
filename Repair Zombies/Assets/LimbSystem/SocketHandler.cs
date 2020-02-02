@@ -6,9 +6,8 @@ using UnityEngine;
 public class SocketHandler : MonoBehaviour
 {
     public Limb attachedLimb { get; private set;  }
-    private Limb priorLimb = null;
     [SerializeField]
-    private SocketHandler nextSocket;
+    private SocketHandler nextSocket, priorSocket;
     [SerializeField]
     private Torso torso;
 
@@ -45,9 +44,9 @@ public class SocketHandler : MonoBehaviour
             topLimb = topLimb.joint2D.connectedBody.GetComponent<Limb>();
         }
 
-        if (priorLimb != null)
+        if (priorSocket != null && priorSocket.attachedLimb != null)
         {
-            priorLimb.AttachChild(topLimb);
+            priorSocket.attachedLimb.AttachChild(topLimb);
         }
 
         attachedLimb = topLimb;
@@ -90,11 +89,11 @@ public class SocketHandler : MonoBehaviour
         }
     }
 
-    public void DetachLimb()
+    public Limb DetachLimb()
     {
-        if (priorLimb != null)
+        if (priorSocket != null && priorSocket.attachedLimb != null)
         {
-            priorLimb.DetachAllChildren();
+            priorSocket.attachedLimb.DetachAllChildren();
         }
 
         gameObject.layer = LayerMask.NameToLayer("Attachable");
@@ -105,9 +104,12 @@ public class SocketHandler : MonoBehaviour
         {
             nextSocket.ChainDetach();
         }
+        Limb temp = attachedLimb;
         attachedLimb = null;
 
         torso.GetLimbVals();
+
+        return temp;
     }
 
     private void ChainDetach()
@@ -130,9 +132,9 @@ public class SocketHandler : MonoBehaviour
         {
             return new Limb.LimbVals
             {
-                movementVal = -1f,
+                movementVal = -0.5f,
                 damageVal = -1f,
-                legScore = -1
+                legScore = 0
             };
         }
         if (nextSocket != null && nextSocket.attachedLimb != null)
@@ -176,16 +178,10 @@ public class SocketHandler : MonoBehaviour
     {
         if(attachedLimb != null)
         {
-            float r = Random.Range(attachedLimb.Health*0.25f, attachedLimb.Health);
-            if (r < 0.25)
+            float r = Random.Range(attachedLimb.Health*0.15f, attachedLimb.Health);
+            if (r < 0.5 - attachedLimb.Health*0.3)
             {
                 DetachLimb();
-            }
-            else if(attachedLimb.TakeDamage(damage))
-            {
-                Limb temp = attachedLimb;
-                DetachLimb();
-                temp.DestroyLimb();
             }
         }
     }

@@ -15,8 +15,8 @@ public class Torso : MonoBehaviour, IDamageable
 
     public float MovementVal;
     public float DamageVal;
-    public int movementState = 2;
 
+    public PostureState posture { get; private set; }
     private bool isAwake = false;
 
 
@@ -47,48 +47,63 @@ public class Torso : MonoBehaviour, IDamageable
     {
         if (isAwake)
         {
-            MovementVal = 0;
-            DamageVal = 0;
-
-
             Limb.LimbValsMultiplier _headMult = head.GetHeadMult();
             Limb.LimbVals _armVals = armFront.GetVals().Add(armBack.GetVals()).Multiply(_headMult);
             Limb.LimbVals _legVals = legFront.GetVals().Add(legBack.GetVals()).Multiply(_headMult);
 
-            if (_legVals.legScore <= crawlThreshold)
-            {
-                movementState = 0;
-            }
-            else if (_legVals.legScore <= hopThreshold)
-            {
-                movementState = 1;
-            }
-            else
-            {
-                movementState = 2;
-            }
+            GetMovementState(_legVals.legScore);
 
-            switch (movementState)
+            switch (posture)
             {
-                case 2:
+                case PostureState.Stand:
                     {
-                        MovementVal += _legVals.movementVal;
-                        DamageVal += _armVals.damageVal;
+                        MovementVal = _legVals.movementVal;
+                        DamageVal = _armVals.damageVal;
                         break;
                     }
-                case 1:
+                case PostureState.Hobble:
                     {
-                        MovementVal += _legVals.movementVal * 0.75f;
-                        DamageVal += _armVals.damageVal * 0.5f;
+                        MovementVal = _legVals.movementVal * 0.75f;
+                        DamageVal = _armVals.damageVal * 0.5f;
                         break;
                     }
-                case 0:
+                case PostureState.Crawl:
                     {
-                        MovementVal += _armVals.movementVal * 0.5f;
-                        DamageVal += _legVals.damageVal * 0.5f;
+                        MovementVal = _armVals.movementVal * 0.5f;
+                        DamageVal = _legVals.damageVal * 0.5f;
                         break;
                     }
             }
+            MovementVal = Math.Max(MovementVal, 0.5f);
+            DamageVal = Math.Max(DamageVal, 0f);
+        }
+    }
+
+    private void GetMovementState(int legScore)
+    {
+        if (legBack.attachedLimb == null && legFront.attachedLimb == null) posture = PostureState.Crawl;
+        else if (legBack.attachedLimb == null)
+        {
+            if (legFront.attachedLimb.NumChildren <= 1) posture = PostureState.Crawl;
+            else posture = PostureState.Hobble;
+        }
+        else if (legFront.attachedLimb == null)
+        {
+            if (legBack.attachedLimb.NumChildren <= 1) posture = PostureState.Crawl;
+            else posture = PostureState.Hobble;
+        }
+        else if (legBack.attachedLimb.NumChildren <= 1 && legFront.attachedLimb.NumChildren <= 1) posture = PostureState.Crawl;
+        else if (legBack.attachedLimb.NumChildren <= 1 || legFront.attachedLimb.NumChildren <= 1) posture = PostureState.Hobble;
+        else posture = PostureState.Stand;
+
+
+        if (legScore <= crawlThreshold && (posture == PostureState.Hobble || posture == PostureState.Stand))
+        {
+            posture = PostureState.Crawl;
+        }
+        else if (legScore <= hopThreshold && posture == PostureState.Stand)
+        {
+            posture = PostureState.Hobble;
         }
     }
 

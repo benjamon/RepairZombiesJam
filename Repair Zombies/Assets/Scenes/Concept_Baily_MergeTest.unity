@@ -651,8 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd85557cce15545928fbd50913055c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popoffTime: 50
-  decayTime: 10
+  popoffTime: 500
+  decayTime: 100
   decayDamage: 0.01
 --- !u!4 &211425632
 Transform:

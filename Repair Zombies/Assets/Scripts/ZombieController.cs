@@ -23,6 +23,7 @@ public class ZombieController : MonoBehaviour {
         }
         else if (action == ActionState.Move) {
             // var rb = GetComponent<Rigidbody2D>();
+            posture = torso.posture;
             float delta = Time.deltaTime;
             float speed = torso.MovementVal * direction * delta * moveMult;
             moveMult *= .95f;
@@ -54,7 +55,7 @@ public class ZombieController : MonoBehaviour {
                 break;
             }
             case PostureState.Crawl: {
-                animator.SetInteger("WalkStatus", 1);
+                animator.SetInteger("WalkStatus", 0);
                 break;
             }
         }

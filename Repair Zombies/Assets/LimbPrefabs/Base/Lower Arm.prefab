@@ -135,6 +135,7 @@ MonoBehaviour:
     damageMult: 1.2
   IsExtremity: 0
   IsHead: 0
+  IsDecomposable: 1
   MaxHealth: 1
   AttachedLimb: {fileID: 0}
 --- !u!50 &2027793280647748880

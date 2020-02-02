@@ -50,6 +50,8 @@ public class Limb : MonoBehaviour
     public bool IsExtremity;
     [SerializeField]
     public bool IsHead;
+    [SerializeField]
+    private bool IsDecomposable;
     [NonSerialized]
     public float Health;
     [SerializeField]
@@ -97,7 +99,7 @@ public class Limb : MonoBehaviour
         rigidBody2D.simulated = false;
         joint2D.connectedBody = null;
         joint2D.enabled = false;
-        FindObjectOfType<DecayController>().DeregisterLimb(this);
+        if(IsDecomposable) FindObjectOfType<DecayController>().DeregisterLimb(this);
     }
 
     public void DetachFromBody()
@@ -105,7 +107,7 @@ public class Limb : MonoBehaviour
         transform.parent = null;
         rigidBody2D.isKinematic = false;
         rigidBody2D.simulated = true;
-        FindObjectOfType<DecayController>().RegisterLimb(this);
+        if (IsDecomposable) FindObjectOfType<DecayController>().RegisterLimb(this);
 
         if (AttachedLimb != null)
         {
@@ -124,6 +126,7 @@ public class Limb : MonoBehaviour
         {
             AttachedLimb.Highlight();
         }
+        GetComponent<SpriteRenderer>().color = Color.red;
     }
 
     public bool TakeDamage(float damage)
@@ -134,7 +137,7 @@ public class Limb : MonoBehaviour
 
     public void DestroyLimb()
     {
-        FindObjectOfType<DecayController>().DeregisterLimb(this);
+        if (IsDecomposable) FindObjectOfType<DecayController>().DeregisterLimb(this);
         if (joint2D.enabled)
         {
             joint2D.connectedBody.GetComponent<Limb>().DetachAllChildren();
@@ -148,14 +151,30 @@ public class Limb : MonoBehaviour
         Destroy(this);
     }
 
+    public void DestroyAllChildren()
+    {
+        if (IsDecomposable) FindObjectOfType<DecayController>().DeregisterLimb(this);
+        if (joint2D.enabled)
+        {
+            joint2D.connectedBody.GetComponent<Limb>().DetachAllChildren();
+        }
+        if (AttachedLimb != null && AttachedLimb.joint2D.enabled)
+        {
+            AttachedLimb.DetachAllChildren();
+        }
+
+        Destroy(this);
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
-        rigidBody2D = GetComponent<Rigidbody2D>();
         joint2D = GetComponent<Joint2D>();
         joint2D.enabled = false;
         joint2D.connectedBody = null;
-        FindObjectOfType<DecayController>().RegisterLimb(this);
+        if (IsDecomposable) FindObjectOfType<DecayController>().RegisterLimb(this);
         Health = MaxHealth;
+        NumChildren = 0;
+        rigidBody2D = GetComponent<Rigidbody2D>();
     }
 }
