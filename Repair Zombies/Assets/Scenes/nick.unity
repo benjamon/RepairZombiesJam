@@ -681,7 +681,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd85557cce15545928fbd50913055c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 30
+  popoffTime: 250
+  decayTime: 50
+  decayDamage: 0.01
 --- !u!4 &211425632
 Transform:
   m_ObjectHideFlags: 0
@@ -2186,6 +2188,11 @@ MonoBehaviour:
   action: 0
   posture: 0
   direction: 1
+  sensor: {fileID: 0}
+  rayMask:
+    serializedVersion: 2
+    m_Bits: 0
+  attackDistance: 0.5
 --- !u!4 &882577341 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5173344782658056878, guid: 8bf16daeaf685415d8a13ba66988dfb8,
@@ -3672,6 +3679,11 @@ MonoBehaviour:
   action: 0
   posture: 0
   direction: 1
+  sensor: {fileID: 152422534}
+  rayMask:
+    serializedVersion: 2
+    m_Bits: 1792
+  attackDistance: 2
 --- !u!114 &1781274258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4253,7 +4265,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4437044892042535998, guid: 8bf16daeaf685415d8a13ba66988dfb8, type: 3}
+    - {fileID: 6827365718788689569, guid: 8bf16daeaf685415d8a13ba66988dfb8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8bf16daeaf685415d8a13ba66988dfb8, type: 3}
 --- !u!1001 &6515005537339690415
 PrefabInstance:
