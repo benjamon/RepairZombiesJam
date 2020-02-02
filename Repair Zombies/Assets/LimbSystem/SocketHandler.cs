@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CircleCollider2D))]
 public class SocketHandler : MonoBehaviour
 {
     private Limb attachedLimb, priorLimb = null;
+    [SerializeField]
     private SocketHandler nextSocket;
     [SerializeField]
     private Torso torso;
 
+    [SerializeField]
     public int AvailableChildren { get; private set; }
+
     public bool IsAttachable { get; private set; }
 
     public bool IsRemoveAble() { return attachedLimb != null; }
+
 
     public void AttachLimb(Limb _limb)
     {
@@ -133,17 +138,23 @@ public class SocketHandler : MonoBehaviour
         }
     }
 
+    const float SOCKET_SIZE = .55f;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        FindObjectOfType<DecayController>().RegisterSocket(this);
+
+        if (GetComponent<CircleCollider2D>() == null)
+        {
+            CircleCollider2D cod = gameObject.AddComponent<CircleCollider2D>();
+            cod.isTrigger = true;
+        }
+        GetComponent<CircleCollider2D>().radius = SOCKET_SIZE;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        Debug.Log("invader: " + collision.transform.name);
     }
-
-    
 }

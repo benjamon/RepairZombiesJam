@@ -4,60 +4,88 @@ using UnityEngine;
 
 public class CameraMouseController : MonoBehaviour
 {
-    private float? lastMousePoint = null;
-    private void Update()
+    public float PullForce;
+    SpriteRenderer LastHighlighted;
+    float lastTimeHighlighted;
+    GameObject heldObject;
+    Vector2 prev;
+    Camera cam;
+    public Transform plane;
+    Plane castPlane;
+    Vector2 lastdelta;
+
+    void Start()
     {
-        if (Input.GetMouseButtonDown(0))
+        cam = GetComponent<Camera>();
+        castPlane = new Plane(plane.transform.forward, plane.transform.position);
+    }
+    
+    void Update()
+    {
+        Ray r = cam.ScreenPointToRay(Input.mousePosition);
+
+        Vector3 v = Vector3.zero;
+
+        if (castPlane.Raycast(r, out float d))
         {
-            lastMousePoint = Input.mousePosition.x;
+        v = r.origin + r.direction.normalized * d;
         }
-        else if (Input.GetMouseButtonUp(0))
+        v.z = 0f;
+        lastdelta = v;
+        prev = v;
+        RaycastHit2D hit = Physics2D.CircleCast(v, .01f, Vector2.zero, 30f, LayerMask.GetMask("Zombie"));
+        if (LastHighlighted != null)
+            LastHighlighted.color = Color.white;
+        if (hit.transform != null)
         {
-            lastMousePoint = null;
+            Debug.Log(hit.collider.name);
+
+            if (heldObject == null)
+            {
+                if (hit.collider.GetComponent<SpriteRenderer>() != null)
+                {
+                    if (LastHighlighted != null)
+                        LastHighlighted.color = Color.white;
+                    LastHighlighted = hit.collider.GetComponent<SpriteRenderer>();
+                    LastHighlighted.color = Color.red;
+                    lastTimeHighlighted = Time.time;
+                }
+            } else if (LastHighlighted != null)
+            {
+                LastHighlighted.color = Color.white;
+                LastHighlighted = null;
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                heldObject = hit.transform.gameObject;
+                heldObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
+                SoundManager.PlaySound(Zound.Hit1, heldObject.transform.position);
+            }
         }
-        if (lastMousePoint != null)
+        if (LastHighlighted != null && Time.time - lastTimeHighlighted > .25f)
         {
-            float difference = Input.mousePosition.x - lastMousePoint.Value;
-            transform.position = new Vector3(transform.position.x + (difference / 188), transform.position.y, transform.position.z);
-            lastMousePoint = Input.mousePosition.x;
+            LastHighlighted.color = Color.white;
+            LastHighlighted = null;
         }
+        if (!Input.GetMouseButton(0) && heldObject != null)
+        {
+            heldObject.GetComponent<Rigidbody2D>().gravityScale = 1f;
+            heldObject = null;
+        }
+        if (heldObject != null)
+            lastdelta = v - heldObject.transform.position;
     }
 
-
-    /* public float force;
-     GameObject heldObject;
-     Vector2 prev;
-     Camera c;
-     // Start is called before the first frame update
-     void Start()
-     {
-         c = GetComponent<Camera>();
-     }
-
-     // Update is called once per frame
-     void Update()
-     {
-         Vector3 v = c.ScreenToWorldPoint(Input.mousePosition);
-         v.z = 0f;
-         Vector2 delta = v;
-         prev = v;
-         RaycastHit2D hit = Physics2D.CircleCast(c.ScreenToWorldPoint(Input.mousePosition), .01f, Vector2.zero);
-         if (hit.transform != null)
-         {
-             if (Input.GetMouseButtonDown(0))
-             {
-                 heldObject = hit.transform.gameObject;
-             }
-         }
-         if (!Input.GetMouseButton(0))
-             heldObject = null;
-
-         if (heldObject != null)
-         {
-             delta = v - heldObject.transform.position; ;
-             heldObject.GetComponent<Rigidbody2D>().AddForceAtPosition(delta * force, heldObject.transform.position);
-         }
-
-     }
-     */
+    private void FixedUpdate()
+    {
+        if (heldObject != null)
+        {
+            Rigidbody2D rb = heldObject.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.AddForceAtPosition(lastdelta * PullForce, heldObject.transform.position);
+                rb.velocity *= .85f;
+            }
+        }
+    }
 }

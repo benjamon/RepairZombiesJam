@@ -54,7 +54,7 @@ public class ZombieController : MonoBehaviour {
                 break;
             }
             case PostureState.Crawl: {
-                animator.SetInteger("WalkStatus", 1);
+                animator.SetInteger("WalkStatus", 0);
                 break;
             }
         }

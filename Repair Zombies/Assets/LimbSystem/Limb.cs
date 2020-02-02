@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Limb : MonoBehaviour
 {
+    [Serializable]
     public struct LimbVals 
     {
         public float movementVal;
@@ -29,6 +31,7 @@ public class Limb : MonoBehaviour
         }
     }
 
+    [Serializable]
     public struct LimbValsMultiplier
     {
         public float movementMult;
@@ -41,16 +44,21 @@ public class Limb : MonoBehaviour
     [SerializeField]
     private LimbValsMultiplier extremityMult;
 
+    [SerializeField]
+    public LimbValsMultiplier HeadMult;
+    [SerializeField]
+    public bool IsExtremity;
+    [SerializeField]
+    public bool IsHead;
+    [SerializeField]
+    public float Health;
+    [SerializeField]
+    public Limb AttachedLimb;
+
+    public int NumChildren { get; private set; }
+
     private Rigidbody2D rigidBody2D;
     private Joint2D joint2D;
-
-    public Limb AttachedLimb { get; set; }
-    public int NumChildren { get; private set; }
-    public LimbValsMultiplier HeadMult { get; }
-    public bool IsExtremity { get; }
-    public bool IsHead { get; }
-    public float Health { get; set; }
-
 
     public LimbVals GetVals()
     {
@@ -76,9 +84,15 @@ public class Limb : MonoBehaviour
     public void AttachToBody(Transform _socket)
     {
         transform.parent = _socket;
+        transform.localPosition = Vector3.zero;
+        transform.localScale = Vector3.one;
+        transform.localRotation = Quaternion.identity;
+        GetComponent<SpriteRenderer>().sortingOrder = _socket.GetComponent<SpriteRenderer>().sortingOrder;
         rigidBody2D.isKinematic = true;
         rigidBody2D.simulated = false;
         joint2D.connectedBody = null;
+        joint2D.enabled = false;
+
     }
 
     public void DetachFromBody()
@@ -89,20 +103,15 @@ public class Limb : MonoBehaviour
 
         if(AttachedLimb != null)
         {
+            AttachedLimb.joint2D.enabled = true;
             AttachedLimb.joint2D.connectedBody = rigidBody2D;
         }
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         joint2D = GetComponent<Joint2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
