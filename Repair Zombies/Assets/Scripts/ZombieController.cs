@@ -9,6 +9,12 @@ public class ZombieController : MonoBehaviour {
     private PostureState posture;
     [SerializeField]
     private int direction = 1;
+    [SerializeField]
+    private Transform sensor;
+    [SerializeField]
+    private LayerMask rayMask;
+    [SerializeField]
+    private float attackDistance = 0.5f;
     
     void Start() {
         torso = this.GetComponent<Torso>();
@@ -25,23 +31,40 @@ public class ZombieController : MonoBehaviour {
             animator.SetTrigger("Attack");
         }
         else if (action == ActionState.Move) {
-            // var rb = GetComponent<Rigidbody2D>();
             float delta = Time.deltaTime;
             float speed = torso.MovementVal * direction * delta * moveMult;
-            // moveMult *= .95f;
-            // rb.MovePosition(new Vector2(transform.position.x + speed, transform.position.y));
-            // transform.position.Set(transform.position.x + speed, transform.position.y, transform.position.z);
+            moveMult *= .95f;
             transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
         }
     }
 
-    float moveMult = 1;
+    float moveMult = 0;
 
     public void CommandMove() {
         moveMult = 1f;
     }
 
     public void Attack() {
+        var rayHits = Physics2D.RaycastAll(sensor.position, Vector2.right, 1.5f, rayMask);
+        Debug.DrawLine(sensor.position, new Vector3(sensor.position.x + 1.5f, sensor.position.y, sensor.position.z), Color.blue);
+        foreach (var rayHit in rayHits) {
+            if (rayHit.collider.gameObject != this.gameObject && rayHit.distance < attackDistance) {
+                Debug.DrawLine(sensor.position, new Vector3(sensor.position.x + rayHit.distance, sensor.position.y, sensor.position.z), Color.red);
+                var damageable = rayHit.collider.GetComponent<IDamageable>();
+                if (damageable != null) {
+                    damageable.DealDamage(torso.DamageVal);
+                    // play obstacle damaged audio
+                }
+            }
+        }
+
+    }
+
+    public void AttackGrunt() {
+        // play zombie attack audio
+    }
+
+    public void StartAttack() {
         animator.SetTrigger("Attack");
         action = ActionState.Attack;
     }
