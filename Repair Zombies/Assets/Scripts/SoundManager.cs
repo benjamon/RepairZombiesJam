@@ -13,6 +13,15 @@ public class SoundManager : MonoBehaviour
     public SoundArray[] Pairs;
     List<AudioSource> sources = new List<AudioSource>();
 
+    IEnumerator Start()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(.3f, 2f));
+            PlaySound(9, Camera.main.transform.position, .3f);
+        }
+    }
+
 
     public static void PlaySound(int soundIndex, Vector2 position, float volume = 1f, bool global = false)
     {

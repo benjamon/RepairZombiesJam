@@ -34,7 +34,7 @@ public class CrowBrain : MonoBehaviour
         } else
         {
             transform.position += (target.position - transform.position).normalized * crowSpeed * Time.deltaTime;
-            if ((transform.position - target.position).magnitude < crowSpeed * Time.deltaTime)
+            if ((transform.position - target.position).magnitude < crowSpeed * Time.deltaTime * 4f)
             {
                 target.tag = "Untagged";
                 limb = target.GetComponent<Limb>();

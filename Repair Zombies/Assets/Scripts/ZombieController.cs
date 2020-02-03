@@ -34,7 +34,7 @@ public class ZombieController : MonoBehaviour {
         else if (action == ActionState.Move) {
             float delta = Time.deltaTime;
             float speed = torso.MovementVal * direction * delta * moveMult;
-            moveMult *= .925f;
+            moveMult *= .912f;
             transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
         }
     }

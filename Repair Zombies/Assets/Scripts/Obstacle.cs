@@ -40,6 +40,6 @@ public class Obstacle : MonoBehaviour, IDamageable
     public void DealDamage(float damage)
     {
         Health -= damage;
-        wobbleAmount += damage;
+        wobbleAmount += damage * .25f;
     }
 }
