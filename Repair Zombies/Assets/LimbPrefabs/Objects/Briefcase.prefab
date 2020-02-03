@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4355664644326304203}
   - component: {fileID: -7670174188132861656}
   m_Layer: 11
-  m_Name: Limb_Generic 1
+  m_Name: Briefcase
   m_TagString: attachable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6515005538024051141}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,15 +74,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c7cc0b094be3145e9956a109a47a6114, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.766, y: 1.706}
+  m_Size: {x: 1.672, y: 1.526}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &6515005538024051138
@@ -98,18 +98,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.08056679, y: -0.6132023}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.6051786, y: 0.8594386}
-    oldSize: {x: 0.766, y: 1.706}
-    newSize: {x: 0.766, y: 1.706}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.672, y: 1.526}
+    newSize: {x: 1.672, y: 1.526}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.766, y: 1.706}
+  m_Size: {x: 1.672, y: 1.526}
   m_EdgeRadius: 0
 --- !u!114 &6515005538024051137
 MonoBehaviour:
@@ -124,19 +124,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limbValsBase:
-    movementVal: 0
-    damageVal: 0
-    legScore: 0
+    movementVal: -1
+    damageVal: 3
+    legScore: -1
   extremityMult:
-    movementMult: 0
-    damageMult: 0
+    movementMult: 0.5
+    damageMult: 1.5
   HeadMult:
-    movementMult: 0
-    damageMult: 0
-  IsExtremity: 0
+    movementMult: 2
+    damageMult: 1
+  IsExtremity: 1
   IsHead: 0
   IsDecomposable: 0
-  MaxHealth: 0
+  MaxHealth: 1
   AttachedLimb: {fileID: 0}
   highlightColor: {r: 0.3233736, g: 0.5943396, b: 0.3224012, a: 0}
   alphaDecay: 0.01
